@@ -1,3 +1,5 @@
+package fr.inria.astor.test;
+
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 
