@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         test: [ 
-          "D4JWorkflowTest"
+          "fr.inria.astor.test.D4JWorkflowTest"
       ]
 
     steps:
