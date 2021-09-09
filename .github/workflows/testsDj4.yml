@@ -1,4 +1,4 @@
-name: tests
+name: testsD4JRepair
 
 on: [push, pull_request]
 
