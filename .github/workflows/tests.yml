@@ -9,7 +9,37 @@ jobs:
     strategy:
       matrix:
         test: [ 
-          "D4JWorkflowTest"
+          "fr.inria.astor.test.repair.QuixBugsRepairTest" , 
+          "fr.inria.astor.test.repair.evaluation.extensionpoints.ingredients.MultiPatchTest" ,
+          "fr.inria.astor.test.repair.evaluation.extensionpoints.patchsorting.PatchPriorizationTest" ,
+          "fr.inria.astor.test.repair.approaches.ExhaustiveAstorTest" ,
+          "fr.inria.astor.test.repair.approaches.jKaliTest" ,
+          "fr.inria.astor.test.repair.approaches.MutRepairTest" ,
+          "fr.inria.astor.test.repair.approaches.JGenProgTest" ,
+          "fr.inria.astor.test.repair.approaches.EvoSuiteGenerationTest" ,
+          "fr.inria.astor.test.repair.approaches.TibraApproachTest" ,
+          "fr.inria.astor.test.repair.approaches.cardumen.CardumenApproachTest" ,
+          "fr.inria.astor.test.repair.approaches.cardumen.CardumenExahustiveTest" ,
+          "fr.inria.astor.test.repair.approaches.JGenProgEvolutionaryTest" ,
+          "fr.inria.astor.test.repair.core.ConfigurationTest" ,
+          "fr.inria.astor.test.repair.core.ValidationTest" ,
+          "fr.inria.astor.test.repair.core.StatsTest" ,
+          "fr.inria.astor.test.repair.core.VariableResolverTest" ,
+          "fr.inria.astor.test.repair.core.PatchDiffTest" ,
+          "fr.inria.astor.test.repair.core.PlugInLoaderTest" ,
+          "fr.inria.astor.test.repair.core.PatchValidationTest" ,
+          "fr.inria.astor.test.repair.core.OutputTest" ,
+          "fr.inria.astor.test.repair.core.ValidationTest" ,
+          "fr.inria.astor.test.repair.evaluation.regression.RepairnatorTest" ,
+          "fr.inria.astor.test.repair.evaluation.regression.LangTest" ,
+          "fr.inria.astor.test.repair.evaluation.extensionpoints.ingredients.IngredientScopeTest" ,
+          "fr.inria.astor.test.repair.evaluation.extensionpoints.ingredients.IngredientProcessorTest" ,
+          "fr.inria.astor.test.repair.evaluation.extensionpoints.ingredients.IngredientPoolTest" ,
+          "fr.inria.astor.test.repair.evaluation.extensionpoints.operatorselection.SelectionOperatorTest" ,
+          "fr.inria.astor.test.repair.evaluation.extensionpoints.operatorselection.RepairOperatorTest" ,
+          "fr.inria.astor.test.repair.evaluation.extensionpoints.suspiciousnavigation.SuspiciousNavigationStrategyTest" ,
+          "fr.inria.astor.test.repair.evaluation.extensionpoints.FaultLocalizationExtensionTest" ,
+          "fr.inria.astor.util.CommandSummaryTest"
       ]
 
     steps:
