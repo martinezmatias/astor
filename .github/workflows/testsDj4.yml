@@ -33,9 +33,6 @@ jobs:
         with:
           maven-version: 3.6.0
 
-      - name: Install example projects
-        run: ./.github/install_examples.sh
-        shell: bash
 
       - name: Run tests
         run: |
