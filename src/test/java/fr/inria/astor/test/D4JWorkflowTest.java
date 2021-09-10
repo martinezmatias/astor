@@ -45,11 +45,12 @@ public class D4JWorkflowTest {
 
 			System.out.println("\nChecking out project: " + bug_id);
 			// for the rest we use Maven
-			String command = "export PATH=/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home:$PATH;"
-					+ "mkdir -p tempdj4/" + bug_id + ";\n cd tempdj4/" + bug_id
-					+ ";\n git init;\n git fetch https://github.com/Spirals-Team/defects4j-repair " + bug_id + ":"
-					+ bug_id + ";\n git checkout " + bug_id + ";\n /usr/local/bin/mvn -q test -DskipTests " + mvn_option
-					+ ";\n /usr/local/bin/mvn -q dependency:build-classpath -Dmdep.outputFile=cp.txt";
+			String command = // "export
+								// PATH=/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home:$PATH;"
+					"mkdir -p tempdj4/" + bug_id + ";\n cd tempdj4/" + bug_id
+							+ ";\n git init;\n git fetch https://github.com/Spirals-Team/defects4j-repair " + bug_id
+							+ ":" + bug_id + ";\n git checkout " + bug_id + ";\n mvn -q test -DskipTests " + mvn_option
+							+ ";\n mvn -q dependency:build-classpath -Dmdep.outputFile=cp.txt";
 			System.out.println(command);
 			Process p = Runtime.getRuntime().exec(new String[] { "sh", "-c", command });
 			p.waitFor();
