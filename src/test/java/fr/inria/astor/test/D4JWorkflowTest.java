@@ -1,17 +1,24 @@
 package fr.inria.astor.test;
 
 import org.apache.commons.io.IOUtils;
+import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 
-class D4JWorkflowTest {
+public class D4JWorkflowTest {
 
 	@Test
+	@Ignore
 	void testMath70() throws Exception {
 
 		run("Math70", "");
 	}
 
 	@Test
+	void testPrint() throws Exception {
+
+		System.out.println("Printing hello");
+	}
+
 	void run(String bug_id, String mvn_option) throws Exception {
 
 		String command = "mkdir -p tempdj4/" + bug_id + ";\n cd tempdj4/" + bug_id
@@ -36,6 +43,22 @@ class D4JWorkflowTest {
 	void testJava() throws Exception {
 
 		String command = "java -version;";
+		System.out.println(command);
+		Process p = Runtime.getRuntime().exec(new String[] { "sh", "-c", command });
+
+		p.waitFor();
+		String output = IOUtils.toString(p.getInputStream());
+		String errorOutput = IOUtils.toString(p.getErrorStream());
+		System.out.println(output);
+		System.err.println(errorOutput);
+
+		System.out.println("End case");
+	}
+
+	@Test
+	void testMvn() throws Exception {
+
+		String command = "mvn;";
 		System.out.println(command);
 		Process p = Runtime.getRuntime().exec(new String[] { "sh", "-c", command });
 
