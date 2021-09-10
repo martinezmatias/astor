@@ -1,5 +1,7 @@
 package fr.inria.astor.test;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -9,9 +11,12 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 
+import fr.inria.astor.core.entities.ProgramVariant;
 import fr.inria.main.CommandSummary;
+import fr.inria.main.evolution.AstorMain;
 
 public class D4JWorkflowTest {
 
@@ -113,8 +118,15 @@ public class D4JWorkflowTest {
 		cs.command.put("-bintestfolder", testBin);
 		cs.command.put("-location", locationProject);
 		cs.command.put("-dependencies", depStrings);
+		cs.command.put("-maxgen", "10000");
+		cs.command.put("-stopfirst", "true");
 
 		System.out.println("\nConfiguration " + cs.command.toString());
+
+		AstorMain main1 = new AstorMain();
+		main1.execute(cs.flat());
+		List<ProgramVariant> variants = main1.getEngine().getVariants();
+		assertTrue(variants.size() > 0);
 
 	}
 
@@ -145,6 +157,7 @@ public class D4JWorkflowTest {
 	}
 
 	@Test
+	@Ignore
 	public void testJava() throws Exception {
 
 		String command = "java -version;";
@@ -161,6 +174,7 @@ public class D4JWorkflowTest {
 	}
 
 	@Test
+	@Ignore
 	public void testMvn() throws Exception {
 
 		System.out.println("Stating test maven:\n");
