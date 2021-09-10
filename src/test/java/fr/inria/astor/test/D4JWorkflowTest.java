@@ -1,13 +1,11 @@
 package fr.inria.astor.test;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class D4JWorkflowTest {
 
 	@Test
-	@Ignore
 	public void testMath70() throws Exception {
 
 		run("Math70", "");
