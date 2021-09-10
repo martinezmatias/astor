@@ -35,7 +35,7 @@ jobs:
           
       - name: Checkout Math70
         run:
-          rm -r tempdj4/Math70
+          rm -rf tempdj4/Math70
           mkdir -p tempdj4/Math70
           cd tempdj4/Math70
           git init
