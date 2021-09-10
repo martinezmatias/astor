@@ -35,8 +35,8 @@ jobs:
           
       - name: Checkout Math70
         run: |
-          mkdir -p tempdj4/math70
-          cd tempdj4/math70
+          mkdir -p tempdj4/Math70
+          cd tempdj4/Math70
           git init
           git fetch https://github.com/Spirals-Team/defects4j-repair Math70:Math70
           git checkout Math70
