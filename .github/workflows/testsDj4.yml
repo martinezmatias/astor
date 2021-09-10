@@ -33,14 +33,14 @@ jobs:
         with:
           maven-version: 3.6.0
           
-	- name: Checkout Math70
-	        run: |
-	        	mkdir -p tempdj4/math70
-	        	cd tempdj4/math70
-				git init
-				git fetch https://github.com/Spirals-Team/defects4j-repair math70:math70
-				git checkout math70
-				mvn -q test -DskipTests
+      - name: Checkout Math70
+        run: |
+          mkdir -p tempdj4/math70
+          cd tempdj4/math70
+          git init
+          git fetch https://github.com/Spirals-Team/defects4j-repair math70:math70
+          git checkout math70
+          mvn -q test -DskipTests
 
       - name: Run tests
         run: |
