@@ -2,24 +2,24 @@ package fr.inria.astor.test;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class D4JWorkflowTest {
 
 	@Test
 	@Ignore
-	void testMath70() throws Exception {
+	public void testMath70() throws Exception {
 
 		run("Math70", "");
 	}
 
 	@Test
-	void testPrint() throws Exception {
+	public void testPrint() throws Exception {
 
 		System.out.println("Printing hello");
 	}
 
-	void run(String bug_id, String mvn_option) throws Exception {
+	public void run(String bug_id, String mvn_option) throws Exception {
 
 		String command = "mkdir -p tempdj4/" + bug_id + ";\n cd tempdj4/" + bug_id
 				+ ";\n git init;\n git fetch https://github.com/Spirals-Team/defects4j-repair " + bug_id + ":" + bug_id
@@ -40,7 +40,7 @@ public class D4JWorkflowTest {
 	}
 
 	@Test
-	void testJava() throws Exception {
+	public void testJava() throws Exception {
 
 		String command = "java -version;";
 		System.out.println(command);
@@ -56,8 +56,9 @@ public class D4JWorkflowTest {
 	}
 
 	@Test
-	void testMvn() throws Exception {
+	public void testMvn() throws Exception {
 
+		System.out.println("Stating test maven:\n");
 		String command = "mvn;";
 		System.out.println(command);
 		Process p = Runtime.getRuntime().exec(new String[] { "sh", "-c", command });
@@ -68,7 +69,7 @@ public class D4JWorkflowTest {
 		System.out.println(output);
 		System.err.println(errorOutput);
 
-		System.out.println("End case");
+		System.out.println("\n End case maven");
 	}
 
 }
