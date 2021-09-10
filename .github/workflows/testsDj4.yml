@@ -34,7 +34,7 @@ jobs:
           maven-version: 3.6.0
           
       - name: Checkout Math70
-        run:
+        run: |
           rm -rf tempdj4/Math70
           mkdir -p tempdj4/Math70
           cd tempdj4/Math70
