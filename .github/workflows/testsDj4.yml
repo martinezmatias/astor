@@ -41,6 +41,9 @@ jobs:
           git fetch https://github.com/Spirals-Team/defects4j-repair Math70:Math70
           git checkout Math70
           mvn -q test -DskipTests
+          mvn -q dependency:build-classpath -Dmdep.outputFile=cp.txt
+          echo 'printing cp'
+          cat cp.txt
 
       - name: Run tests
         run: |
