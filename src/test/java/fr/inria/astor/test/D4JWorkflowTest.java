@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import fr.inria.astor.core.entities.ProgramVariant;
@@ -26,8 +25,14 @@ public class D4JWorkflowTest {
 		runComplete("Math70", "");
 	}
 
-	public void runComplete(String bug_id, String mvn_option) throws Exception {
+	@Test
+	public void testMath50() throws Exception {
 
+		runComplete("Math50", "");
+	}
+
+	protected void runComplete(String bug_id, String mvn_option) throws Exception {
+		System.out.println("\n****\nRunning repair attempt for " + bug_id);
 		// for Chart, we use ant
 		if (bug_id.startsWith("Chart") && !new File(bug_id).exists()) {
 			// here we use maven to compile
@@ -135,14 +140,10 @@ public class D4JWorkflowTest {
 		AstorMain main1 = new AstorMain();
 		main1.execute(cs.flat());
 		List<ProgramVariant> variants = main1.getEngine().getVariants();
+
+		System.out.println("Finishing execution for " + bug_id + ": # patches: " + variants.size());
 		assertTrue(variants.size() > 0);
 
-	}
-
-	@Test
-	public void testPrint() throws Exception {
-
-		System.out.println("Printing hello");
 	}
 
 	public void run(String bug_id, String mvn_option) throws Exception {
@@ -163,41 +164,6 @@ public class D4JWorkflowTest {
 
 		System.out.println("End case");
 
-	}
-
-	@Test
-	@Ignore
-	public void testJava() throws Exception {
-
-		String command = "java -version;";
-		System.out.println(command);
-		Process p = Runtime.getRuntime().exec(new String[] { "sh", "-c", command });
-
-		p.waitFor();
-		String output = IOUtils.toString(p.getInputStream());
-		String errorOutput = IOUtils.toString(p.getErrorStream());
-		System.out.println(output);
-		System.err.println(errorOutput);
-
-		System.out.println("End case");
-	}
-
-	@Test
-	@Ignore
-	public void testMvn() throws Exception {
-
-		System.out.println("Stating test maven:\n");
-		String command = "mvn;";
-		System.out.println(command);
-		Process p = Runtime.getRuntime().exec(new String[] { "sh", "-c", command });
-
-		p.waitFor();
-		String output = IOUtils.toString(p.getInputStream());
-		String errorOutput = IOUtils.toString(p.getErrorStream());
-		System.out.println(output);
-		System.err.println(errorOutput);
-
-		System.out.println("\n End case maven");
 	}
 
 }
