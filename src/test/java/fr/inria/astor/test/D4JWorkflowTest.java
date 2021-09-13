@@ -88,12 +88,12 @@ public class D4JWorkflowTest {
 		File maven_app = new File(locationProject + "/target/classes");
 		if (maven_app.exists()) {
 			// cp.add(maven_app.toURL());
-			classBin = maven_app.getAbsolutePath();
+			classBin = "/target/classes";// maven_app.getAbsolutePath();
 		}
 		File maven_test = new File(locationProject + "/target/test-classes");
 		if (maven_test.exists()) {
 			// cp.add(maven_test.toURL());
-			testBin = maven_app.getAbsolutePath();
+			testBin = "/target/test-classes";// maven_app.getAbsolutePath();
 		}
 		File ant_app = new File(locationProject + "/build");
 		if (ant_app.exists()) {
@@ -116,10 +116,19 @@ public class D4JWorkflowTest {
 		cs.command.put("-srctestfolder", srcTst);
 		cs.command.put("-binjavafolder", classBin);
 		cs.command.put("-bintestfolder", testBin);
-		cs.command.put("-location", locationProject);
+
+		cs.command.put("-location", locationProject); // "/Users/matias/develop/code/astor/./examples/math_70");
 		cs.command.put("-dependencies", depStrings);
 		cs.command.put("-maxgen", "10000");
 		cs.command.put("-stopfirst", "true");
+		cs.command.put("-loglevel", "DEBUG");
+		cs.command.put("-package", "org.apache.commons");
+
+		cs.command.put("-javacompliancelevel", "7");
+
+		cs.command.put("-population", "1");
+		cs.command.put("-flthreshold", "0.5");
+		cs.command.put("-seed", "10");
 
 		System.out.println("\nConfiguration " + cs.command.toString());
 
