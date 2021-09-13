@@ -28,7 +28,11 @@ public class D4JWorkflowTest {
 	@Parameters
 	public static Collection<Object[]> data() {
 		return Arrays.asList(new Object[][] { { "Math70" }, { "Math81" }, { "Math82" }, { "Math84" }, { "Math85" },
-				{ "Math95" }, { "Math50" } });
+				{ "Math95" }, { "Math71" }, { "Math73" }, { "Math78" }, { "Math80" }// ,
+																					// {
+																					// "Math50"
+																					// }
+		});
 	}
 
 	public String bugid;
