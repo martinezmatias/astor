@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
@@ -12,26 +14,35 @@ import java.util.stream.Collectors;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 import fr.inria.astor.core.entities.ProgramVariant;
 import fr.inria.main.CommandSummary;
 import fr.inria.main.evolution.AstorMain;
 
+@RunWith(Parameterized.class)
 public class D4JWorkflowTest {
 
-	@Test
-	public void testMath70() throws Exception {
+	@Parameters
+	public static Collection<Object[]> data() {
+		return Arrays.asList(new Object[][] { { "Math70" }, { "Math81" }, { "Math82" }, { "Math84" }, { "Math85" },
+				{ "Math95" }, { "Math50" } });
+	}
 
-		runComplete("Math70", "");
+	public String bugid;
+
+	public D4JWorkflowTest(String buugid) {
+		this.bugid = buugid;
 	}
 
 	@Test
-	public void testMath50() throws Exception {
-
-		runComplete("Math50", "");
+	public void testParam() throws Exception {
+		runComplete(bugid, "");
 	}
 
-	protected void runComplete(String bug_id, String mvn_option) throws Exception {
+	public void runComplete(String bug_id, String mvn_option) throws Exception {
 		System.out.println("\n****\nRunning repair attempt for " + bug_id);
 		// for Chart, we use ant
 		if (bug_id.startsWith("Chart") && !new File(bug_id).exists()) {
@@ -127,22 +138,23 @@ public class D4JWorkflowTest {
 		cs.command.put("-maxgen", "10000");
 		cs.command.put("-stopfirst", "true");
 		cs.command.put("-loglevel", "DEBUG");
-		cs.command.put("-package", "org.apache.commons");
+		// cs.command.put("-package", "org.apache.commons");
+		cs.command.put("-maxtime", "30");
 
 		cs.command.put("-javacompliancelevel", "7");
 
 		cs.command.put("-population", "1");
-		cs.command.put("-flthreshold", "0.5");
+		cs.command.put("-flthreshold", "0.1");
 		cs.command.put("-seed", "10");
 
 		System.out.println("\nConfiguration " + cs.command.toString());
 
 		AstorMain main1 = new AstorMain();
 		main1.execute(cs.flat());
-		List<ProgramVariant> variants = main1.getEngine().getVariants();
+		List<ProgramVariant> variantsSolutions = main1.getEngine().getSolutions();
 
-		System.out.println("Finishing execution for " + bug_id + ": # patches: " + variants.size());
-		assertTrue(variants.size() > 0);
+		System.out.println("Finishing execution for " + bug_id + ": # patches: " + variantsSolutions.size());
+		assertTrue(variantsSolutions.size() > 0);
 
 	}
 
