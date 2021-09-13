@@ -33,18 +33,6 @@ jobs:
         with:
           maven-version: 3.6.0
           
-      - name: Checkout Math70
-        run: |
-          rm -rf tempdj4/Math70
-          mkdir -p tempdj4/Math70
-          cd tempdj4/Math70
-          git init
-          git fetch https://github.com/Spirals-Team/defects4j-repair Math70:Math70
-          git checkout Math70
-          mvn -q test -DskipTests
-          mvn -q dependency:build-classpath -Dmdep.outputFile=cp.txt
-          echo 'printing cp'
-          cat cp.txt
 
       - name: Run tests
         run: |
