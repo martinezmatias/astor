@@ -42,8 +42,8 @@ jobs:
           
       - uses: actions/upload-artifact@v2
         with:
-        name: resultsD4J
-        path: resultsTestCases/
+        	name: resultsD4J
+        	path: resultsTestCases/
 
       - name: Codecov
         uses: codecov/codecov-action@v1.5.2
