@@ -33,6 +33,10 @@ jobs:
         with:
           maven-version: 3.6.0
           
+      - name: removing resultsTestCases
+        run: | 
+         rm -r resultsTestCases/
+          
 
       - name: Run tests
         run: |
