@@ -39,6 +39,11 @@ jobs:
           mvn -ff -q clean
           mvn -ff -q test -DskipTests -DfailIfNoTests=false
           mvn -ff -q surefire:test -DfailIfNoTests=false -Dtest=${{ matrix.test }}
+          
+      - uses: actions/upload-artifact@v2
+        with:
+        name: resultsD4J
+        path: resultsTestCases/
 
       - name: Codecov
         uses: codecov/codecov-action@v1.5.2
