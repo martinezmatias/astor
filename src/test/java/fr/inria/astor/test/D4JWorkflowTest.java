@@ -4,6 +4,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -27,11 +30,11 @@ public class D4JWorkflowTest {
 
 	@Parameters
 	public static Collection<Object[]> data() {
-		return Arrays.asList(new Object[][] { { "Math70" }, { "Math81" }, { "Math82" }, { "Math84" }, { "Math85" },
-				{ "Math95" }, { "Math71" }, { "Math73" }, { "Math78" }, { "Math80" }// ,
-																					// {
-																					// "Math50"
-																					// }
+		return Arrays.asList(new Object[][] { { "Math70" }, // { "Math81" }, { "Math82" }, { "Math84" }, { "Math85" },
+				// { "Math95" }, { "Math71" }, { "Math73" }, { "Math78" }, { "Math80" }// ,
+				// {
+				// "Math50"
+				// }
 		});
 	}
 
@@ -158,6 +161,26 @@ public class D4JWorkflowTest {
 		List<ProgramVariant> variantsSolutions = main1.getEngine().getSolutions();
 
 		System.out.println("Finishing execution for " + bug_id + ": # patches: " + variantsSolutions.size());
+
+		//
+		File dirResults = new File("./resultsTestCases");
+		if (!dirResults.exists()) {
+			dirResults.mkdirs();
+		}
+
+		FileWriter fw = new FileWriter(
+				dirResults.getAbsolutePath() + File.pathSeparator + "results_" + bug_id + ".json");
+		fw.write("{bugid=" + this.bugid + "}");
+		fw.close();
+
+		//
+		File foutput = new File("./output_astor/AstorMain-" + bug_id + File.separator + "astor_output.json");
+
+		// We rename the file and put in a result folder
+		File foutputnew = new File(
+				dirResults.getAbsolutePath() + File.separator + File.separator + "astor_output_" + bug_id + ".json");
+		Files.copy(foutput.toPath(), foutputnew.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
 		assertTrue(variantsSolutions.size() > 0);
 
 	}
