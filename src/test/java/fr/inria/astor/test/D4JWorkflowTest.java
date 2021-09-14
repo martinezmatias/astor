@@ -169,9 +169,8 @@ public class D4JWorkflowTest {
 			dirResults.mkdirs();
 		}
 
-		FileWriter fw = new FileWriter(
-				dirResults.getAbsolutePath() + File.pathSeparator + "results_" + bug_id + ".json");
-		fw.write("{bugid=" + this.bugidParametrized + "}");
+		FileWriter fw = new FileWriter(dirResults.getAbsolutePath() + File.separator + "results_" + bug_id + ".json");
+		fw.write("{bugid=" + this.bugidParametrized + ", solutions=" + variantsSolutions.size() + "}");
 		fw.close();
 
 		//
