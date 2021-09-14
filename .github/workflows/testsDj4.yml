@@ -35,7 +35,7 @@ jobs:
           
       - name: removing resultsTestCases
         run: | 
-         rm -r resultsTestCases/
+         rm -rf resultsTestCases/
           
 
       - name: Run tests
