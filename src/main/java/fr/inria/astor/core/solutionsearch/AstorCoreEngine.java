@@ -177,6 +177,9 @@ public abstract class AstorCoreEngine implements AstorExtensionPoint {
 		currentStat.getGeneralStats().put(GeneralStatEnum.EXECUTION_IDENTIFIER,
 				ConfigurationProperties.getProperty("projectIdentifier"));
 
+		currentStat.getGeneralStats().put(GeneralStatEnum.FAULT_LOCALIZATION,
+				ConfigurationProperties.getProperty("faultlocalization").toString());
+
 		this.printFinalStatus();
 
 		if (this.solutions.size() > 0) {
@@ -819,7 +822,7 @@ public abstract class AstorCoreEngine implements AstorExtensionPoint {
 	 * This method updates modification point of a variant according to a created
 	 * GenOperationInstance
 	 * 
-	 * @param variant        variant to modify the modification point information
+	 * @param variant   variant to modify the modification point information
 	 * @param operation operator to apply in the variant.
 	 */
 	protected void updateVariantGenList(ProgramVariant variant, OperatorInstance operation) {

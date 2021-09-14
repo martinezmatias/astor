@@ -38,15 +38,15 @@ public class D4JWorkflowTest {
 		});
 	}
 
-	public String bugid;
+	public String bugidParametrized;
 
 	public D4JWorkflowTest(String buugid) {
-		this.bugid = buugid;
+		this.bugidParametrized = buugid;
 	}
 
 	@Test
 	public void testParam() throws Exception {
-		runComplete(bugid, "");
+		runComplete(bugidParametrized, "");
 	}
 
 	public void runComplete(String bug_id, String mvn_option) throws Exception {
@@ -134,6 +134,7 @@ public class D4JWorkflowTest {
 		System.out.println(depStrings);
 
 		CommandSummary cs = new CommandSummary();
+		cs.command.put("-id", bug_id);
 		cs.command.put("-mode", "jGenProg");
 		cs.command.put("-srcjavafolder", src);
 		cs.command.put("-srctestfolder", srcTst);
@@ -170,7 +171,7 @@ public class D4JWorkflowTest {
 
 		FileWriter fw = new FileWriter(
 				dirResults.getAbsolutePath() + File.pathSeparator + "results_" + bug_id + ".json");
-		fw.write("{bugid=" + this.bugid + "}");
+		fw.write("{bugid=" + this.bugidParametrized + "}");
 		fw.close();
 
 		//
