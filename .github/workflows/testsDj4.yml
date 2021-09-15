@@ -9,7 +9,8 @@ jobs:
     strategy:
       matrix:
         test: [ 
-          "fr.inria.astor.test.D4JWorkflowTest"
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath70",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath81"
       ]
 
     steps:

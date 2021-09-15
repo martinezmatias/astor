@@ -49,7 +49,7 @@ public class D4JWorkflowTest {
 		runComplete(bugidParametrized, "");
 	}
 
-	public void runComplete(String bug_id, String mvn_option) throws Exception {
+	public static void runComplete(String bug_id, String mvn_option) throws Exception {
 		System.out.println("\n****\nRunning repair attempt for " + bug_id);
 		// for Chart, we use ant
 		if (bug_id.startsWith("Chart") && !new File(bug_id).exists()) {
@@ -170,7 +170,7 @@ public class D4JWorkflowTest {
 		}
 
 		FileWriter fw = new FileWriter(dirResults.getAbsolutePath() + File.separator + "results_" + bug_id + ".json");
-		fw.write("{bugid=" + this.bugidParametrized + ", solutions=" + variantsSolutions.size() + "}");
+		fw.write("{bugid=" + bug_id + ", solutions=" + variantsSolutions.size() + "}");
 		fw.close();
 
 		//
