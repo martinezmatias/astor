@@ -194,23 +194,23 @@ public abstract class AstorCoreEngine implements AstorExtensionPoint {
 			log.info(this.getSolutionData(this.solutions, this.generationsExecuted) + "\n");
 
 			patchInfo = createStatsForPatches(solutions, generationsExecuted, dateInitEvolution);
+		} else {
+			patchInfo = new ArrayList<>();
+		}
+		// Reporting results
+		String output = this.projectFacade.getProperties().getWorkingDirRoot();
+		for (ReportResults out : this.getOutputResults()) {
+			out.produceOutput(patchInfo, this.currentStat.getGeneralStats(), output);
+			if (ConfigurationProperties.getPropertyBool("removeworkingfolder")) {
+				File fout = new File(output);
 
-			// Reporting results
-			String output = this.projectFacade.getProperties().getWorkingDirRoot();
-			for (ReportResults out : this.getOutputResults()) {
-				out.produceOutput(patchInfo, this.currentStat.getGeneralStats(), output);
-				if (ConfigurationProperties.getPropertyBool("removeworkingfolder")) {
-					File fout = new File(output);
-
-					try {
-						FileUtils.deleteDirectory(fout);
-					} catch (IOException e) {
-						e.printStackTrace();
-						log.error(e);
-					}
+				try {
+					FileUtils.deleteDirectory(fout);
+				} catch (IOException e) {
+					e.printStackTrace();
+					log.error(e);
 				}
 			}
-
 		}
 
 	}
