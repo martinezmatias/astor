@@ -21,9 +21,11 @@ jobs:
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath70",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath71",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath73",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath78",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath80",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath81",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath82",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath84",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath85",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath95",          
       ]
