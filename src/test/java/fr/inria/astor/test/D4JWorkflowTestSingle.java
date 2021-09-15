@@ -14,42 +14,42 @@ public class D4JWorkflowTestSingle {
 
 	@Test
 	public void testMath2() throws Exception {
-		D4JWorkflowTest.runComplete("Math2", "");
+		D4JWorkflowTest.runComplete("Math2", "", 90);
 	}
 
 	@Test
 	public void testMath5() throws Exception {
-		D4JWorkflowTest.runComplete("Math5", "");
+		D4JWorkflowTest.runComplete("Math5", "", 90);
 	}
 
 	@Test
 	public void testMath8() throws Exception {
-		D4JWorkflowTest.runComplete("Math8", "");
+		D4JWorkflowTest.runComplete("Math8", "", 90);
 	}
 
 	@Test
 	public void testMath28() throws Exception {
-		D4JWorkflowTest.runComplete("Math28", "");
+		D4JWorkflowTest.runComplete("Math28", "", 90);
 	}
 
 	@Test
 	public void testMath40() throws Exception {
-		D4JWorkflowTest.runComplete("Math40", "");
+		D4JWorkflowTest.runComplete("Math40", "", 90);
 	}
 
 	@Test
 	public void testMath49() throws Exception {
-		D4JWorkflowTest.runComplete("Math49", "");
+		D4JWorkflowTest.runComplete("Math49", "", 90);
 	}
 
 	@Test
 	public void testMath50() throws Exception {
-		D4JWorkflowTest.runComplete("Math50", "");
+		D4JWorkflowTest.runComplete("Math50", "", 90);
 	}
 
 	@Test
 	public void testMath53() throws Exception {
-		D4JWorkflowTest.runComplete("Math53", "");
+		D4JWorkflowTest.runComplete("Math53", "", 90);
 	}
 
 	@Test
@@ -59,7 +59,7 @@ public class D4JWorkflowTestSingle {
 
 	@Test
 	public void testMath71() throws Exception {
-		D4JWorkflowTest.runComplete("Math71", "");
+		D4JWorkflowTest.runComplete("Math71", "", 90);
 	}
 
 	@Test

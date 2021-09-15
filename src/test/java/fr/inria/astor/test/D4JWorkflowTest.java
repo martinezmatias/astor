@@ -50,6 +50,11 @@ public class D4JWorkflowTest {
 	}
 
 	public static void runComplete(String bug_id, String mvn_option) throws Exception {
+
+		runComplete(bug_id, mvn_option, 30);
+	}
+
+	public static void runComplete(String bug_id, String mvn_option, int timeout) throws Exception {
 		System.out.println("\n****\nRunning repair attempt for " + bug_id);
 		// for Chart, we use ant
 		if (bug_id.startsWith("Chart") && !new File(bug_id).exists()) {
@@ -147,7 +152,7 @@ public class D4JWorkflowTest {
 		cs.command.put("-stopfirst", "true");
 		cs.command.put("-loglevel", "DEBUG");
 		// cs.command.put("-package", "org.apache.commons");
-		cs.command.put("-maxtime", "30");
+		cs.command.put("-maxtime", new Integer(timeout).toString());
 
 		cs.command.put("-faultlocalization", "gzoltar");
 
