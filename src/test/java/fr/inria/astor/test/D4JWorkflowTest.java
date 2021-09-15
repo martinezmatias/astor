@@ -149,6 +149,8 @@ public class D4JWorkflowTest {
 		// cs.command.put("-package", "org.apache.commons");
 		cs.command.put("-maxtime", "30");
 
+		cs.command.put("-faultlocalization", "gzoltar");
+
 		cs.command.put("-javacompliancelevel", "7");
 
 		cs.command.put("-population", "1");
