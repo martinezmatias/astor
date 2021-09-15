@@ -9,8 +9,24 @@ jobs:
     strategy:
       matrix:
         test: [ 
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath2",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath5",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath8",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath28",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath40",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath49",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath50",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath53",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath70",
-          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath81"
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath71",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath73",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath78",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath80",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath81",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath82",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath84",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath85",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath95",          
       ]
 
     steps:
