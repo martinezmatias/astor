@@ -128,13 +128,14 @@ public class D4JWorkflowTest {
 		}
 		File ant_app = new File(locationProject + "/build");
 		if (ant_app.exists()) {
-			classBin = ant_app.getAbsolutePath();
+			classBin = "/build";// ant_app.getAbsolutePath();
 		}
 		File ant_test = new File(locationProject + "/build-tests");
 		if (ant_test.exists()) {
 			// cp.add(ant_test.toURL());
-			testBin = ant_test.getAbsolutePath();
+			testBin = "/build-tests";// ant_test.getAbsolutePath();
 		}
+
 		System.out.println(cp);
 		//
 		String depStrings = cp.stream().map(n -> n.toString()).collect(Collectors.joining(File.pathSeparator));
