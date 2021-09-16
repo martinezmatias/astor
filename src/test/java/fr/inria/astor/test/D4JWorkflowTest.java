@@ -64,7 +64,7 @@ public class D4JWorkflowTest {
 		// for Chart, we use ant
 		if (bug_id.startsWith("Chart") && !new File(bug_id).exists()) {
 			// here we use maven to compile
-			String command = "mkdir " + bug_id + ";\n cd " + bug_id
+			String command = "mkdir -p tempdj4/" + bug_id + ";\n cd tempdj4/" + bug_id
 					+ ";\n git init;\n git fetch https://github.com/Spirals-Team/defects4j-repair " + bug_id + ":"
 					+ bug_id + ";\n git checkout " + bug_id + ";\n" + "sed -i -e '/delete dir/ d' ant/build.xml;\n"
 					+ "ant -f ant/build.xml compile compile-tests;\n"
@@ -83,12 +83,10 @@ public class D4JWorkflowTest {
 
 			System.out.println("\nChecking out project: " + bug_id);
 			// for the rest we use Maven
-			String command = // "export
-								// PATH=/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home:$PATH;"
-					"mkdir -p tempdj4/" + bug_id + ";\n cd tempdj4/" + bug_id
-							+ ";\n git init;\n git fetch https://github.com/Spirals-Team/defects4j-repair " + bug_id
-							+ ":" + bug_id + ";\n git checkout " + bug_id + ";\n mvn -q test -DskipTests " + mvn_option
-							+ ";\n mvn -q dependency:build-classpath -Dmdep.outputFile=cp.txt";
+			String command = "mkdir -p tempdj4/" + bug_id + ";\n cd tempdj4/" + bug_id
+					+ ";\n git init;\n git fetch https://github.com/Spirals-Team/defects4j-repair " + bug_id + ":"
+					+ bug_id + ";\n git checkout " + bug_id + ";\n mvn -q test -DskipTests " + mvn_option
+					+ ";\n mvn -q dependency:build-classpath -Dmdep.outputFile=cp.txt";
 			System.out.println(command);
 			Process p = Runtime.getRuntime().exec(new String[] { "sh", "-c", command });
 			p.waitFor();
