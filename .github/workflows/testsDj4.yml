@@ -27,7 +27,16 @@ jobs:
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath82",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath84",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath85",
-          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath95",          
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath95",    
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart1",   
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart3",  
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart5",  	 
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart7",                  
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart13",  
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart15",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart25", 
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testTime4",  
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testTime11",  		  		
       ]
 
     steps:

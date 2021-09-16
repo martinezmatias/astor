@@ -46,15 +46,20 @@ public class D4JWorkflowTest {
 
 	@Test
 	public void testParam() throws Exception {
-		runComplete(bugidParametrized, "");
+		runCompleteJGenProg(bugidParametrized, "");
 	}
 
-	public static void runComplete(String bug_id, String mvn_option) throws Exception {
+	public static void runCompleteJGenProg(String bug_id, String mvn_option) throws Exception {
 
-		runComplete(bug_id, mvn_option, 30);
+		runComplete(bug_id, mvn_option, "jGenProg", 30);
 	}
 
-	public static void runComplete(String bug_id, String mvn_option, int timeout) throws Exception {
+	public static void runCompleteJGenProg(String bug_id, String mvn_option, int timeout) throws Exception {
+
+		runComplete(bug_id, mvn_option, "jGenProg", timeout);
+	}
+
+	public static void runComplete(String bug_id, String mvn_option, String approach, int timeout) throws Exception {
 		System.out.println("\n****\nRunning repair attempt for " + bug_id);
 		// for Chart, we use ant
 		if (bug_id.startsWith("Chart") && !new File(bug_id).exists()) {
@@ -140,7 +145,7 @@ public class D4JWorkflowTest {
 
 		CommandSummary cs = new CommandSummary();
 		cs.command.put("-id", bug_id);
-		cs.command.put("-mode", "jGenProg");
+		cs.command.put("-mode", approach);
 		cs.command.put("-srcjavafolder", src);
 		cs.command.put("-srctestfolder", srcTst);
 		cs.command.put("-binjavafolder", classBin);
