@@ -16,7 +16,6 @@ jobs:
           distribution: 'adopt'
 
       - name: Java First call with Java 8
-        id: step_one
         run: |
           echo 'test Java 8'
           java -version
@@ -28,7 +27,6 @@ jobs:
           distribution: 'adopt'
 
       - name: Java Second call with Java 7
-        id: step_one
         run: |
           echo 'test Java 7'
           java -version          
@@ -40,7 +38,6 @@ jobs:
           distribution: 'adopt'
           
       - name: Java Second call with Java 11
-        id: step_one
         run: |
           echo 'test Java 11'
           java -version   
