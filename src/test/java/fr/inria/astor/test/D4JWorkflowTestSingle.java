@@ -217,4 +217,34 @@ public class D4JWorkflowTestSingle {
 		D4JWorkflowTest.runComplete("Time11", "", "jKali", 30);
 	}
 
+	@Test
+	public void testChart1JKali() throws Exception {
+		D4JWorkflowTest.runComplete("Chart1", "", "jKali", 30);
+	}
+
+	@Test
+	public void testChart5JKali() throws Exception {
+		D4JWorkflowTest.runComplete("Chart5", "", "jKali", 30);
+	}
+
+	@Test
+	public void testChart13JKali() throws Exception {
+		D4JWorkflowTest.runComplete("Chart13", "", "jKali", 30);
+	}
+
+	@Test
+	public void testChart15JKali() throws Exception {
+		D4JWorkflowTest.runComplete("Chart15", "", "jKali", 30);
+	}
+
+	@Test
+	public void testChart25JKali() throws Exception {
+		D4JWorkflowTest.runComplete("Chart25", "", "jKali", 30);
+	}
+
+	@Test
+	public void testChart26JKali() throws Exception {
+		D4JWorkflowTest.runComplete("Chart26", "", "jKali", 30);
+	}
+
 }

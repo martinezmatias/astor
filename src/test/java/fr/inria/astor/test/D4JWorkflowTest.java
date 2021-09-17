@@ -150,7 +150,7 @@ public class D4JWorkflowTest {
 		cs.command.put("-binjavafolder", classBin);
 		cs.command.put("-bintestfolder", testBin);
 
-		cs.command.put("-location", locationProject); // "/Users/matias/develop/code/astor/./examples/math_70");
+		cs.command.put("-location", locationProject);
 		cs.command.put("-dependencies", depStrings);
 		cs.command.put("-maxgen", "10000");
 		cs.command.put("-stopfirst", "true");
@@ -165,6 +165,7 @@ public class D4JWorkflowTest {
 		cs.command.put("-population", "1");
 		cs.command.put("-flthreshold", "0.1");
 		cs.command.put("-seed", "10");
+		cs.command.put("-tmax1", "30000");
 
 		System.out.println("\nConfiguration " + cs.command.toString());
 
