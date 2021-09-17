@@ -84,6 +84,8 @@ jobs:
           mvn -ff -q clean
           mvn -ff -q test -DskipTests -DfailIfNoTests=false
           mvn -ff -q surefire:test -DfailIfNoTests=false -Dtest=${{ matrix.test }}
+          TZ='America/Los_Angeles'
+          export TZ
           
       - uses: actions/upload-artifact@v2
         with:
