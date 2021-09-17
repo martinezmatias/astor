@@ -4,12 +4,6 @@ import org.junit.Test;
 
 public class D4JWorkflowTestSingle {
 
-///Arrays.asList(new Object[][] { { "Math70" }, { "Math81" }, { "Math82" }, { "Math84" }, { "Math85" },
-//	{ "Math95" }, { "Math71" }, { "Math73" }, { "Math78" }, { "Math80" }// ,
-	// {
-	// "Math50"
-	// }
-
 	public String bugidParametrized;
 
 	@Test
@@ -145,6 +139,82 @@ public class D4JWorkflowTestSingle {
 	@Test
 	public void testTime11() throws Exception {
 		D4JWorkflowTest.runCompleteJGenProg("Time11", "");
+	}
+
+	//
+	@Test
+	public void testMath2JKali() throws Exception {
+		D4JWorkflowTest.runComplete("Math2", "", "jKali", 30);
+	}
+
+	@Test
+	public void testMath8JKali() throws Exception {
+		D4JWorkflowTest.runComplete("Math8", "", "jKali", 30);
+	}
+
+	@Test
+	public void testMath28JKali() throws Exception {
+		D4JWorkflowTest.runComplete("Math28", "", "jKali", 30);
+	}
+
+	@Test
+	public void testMath32JKali() throws Exception {
+		D4JWorkflowTest.runComplete("Math32", "", "jKali", 30);
+	}
+
+	@Test
+	public void testMath40JKali() throws Exception {
+		D4JWorkflowTest.runComplete("Math40", "", "jKali", 30);
+	}
+
+	@Test
+	public void testMath49JKali() throws Exception {
+		D4JWorkflowTest.runComplete("Math49", "", "jKali", 30);
+	}
+
+	@Test
+	public void testMath50JKali() throws Exception {
+		D4JWorkflowTest.runComplete("Math50", "", "jKali", 30);
+	}
+
+	@Test
+	public void testMath78JKali() throws Exception {
+		D4JWorkflowTest.runComplete("Math50", "", "jKali", 30);
+	}
+
+	@Test
+	public void testMath80JKali() throws Exception {
+		D4JWorkflowTest.runComplete("Math80", "", "jKali", 30);
+	}
+
+	@Test
+	public void testMath81JKali() throws Exception {
+		D4JWorkflowTest.runComplete("Math81", "", "jKali", 30);
+	}
+
+	@Test
+	public void testMath82JKali() throws Exception {
+		D4JWorkflowTest.runComplete("Math82", "", "jKali", 30);
+	}
+
+	@Test
+	public void testMath84JKali() throws Exception {
+		D4JWorkflowTest.runComplete("Math84", "", "jKali", 30);
+	}
+
+	@Test
+	public void testMath85JKali() throws Exception {
+		D4JWorkflowTest.runComplete("Math85", "", "jKali", 30);
+	}
+
+	@Test
+	public void testMath95JKali() throws Exception {
+		D4JWorkflowTest.runComplete("Math95", "", "jKali", 30);
+	}
+
+	@Test
+	public void testTime11JKali() throws Exception {
+		D4JWorkflowTest.runComplete("Time11", "", "jKali", 30);
 	}
 
 }
