@@ -168,6 +168,9 @@ public class D4JWorkflowTest {
 
 		System.out.println("\nConfiguration " + cs.command.toString());
 
+		cs.command.put("-ignoredtestcases", "org.apache.commons.math.util.FastMathTest");
+		// org.apache.commons.math.util.FastMathTest#checkMissingFastMathClasses
+
 		AstorMain main1 = new AstorMain();
 		main1.execute(cs.flat());
 		List<ProgramVariant> variantsSolutions = main1.getEngine().getSolutions();
