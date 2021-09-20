@@ -43,23 +43,13 @@ jobs:
           mvn -ff -q surefire:test -DfailIfNoTests=false -Dtest=${{ matrix.test }}
           TZ='America/Los_Angeles'
           export TZ
-          
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-         python-version: '3.6' 
-  
-          
+                
           
       - uses: actions/upload-artifact@v2
         with:
           name: resultsD4J
           path: resultsTestCases/
-          
-      - uses: actions/upload-artifact@v2
-        with:
-          name: summary.md
-          path: ./resultsTestCases/summary.md
+         
 
       - name: Codecov
         uses: codecov/codecov-action@v1.5.2
