@@ -50,13 +50,6 @@ jobs:
          python-version: '3.6' 
   
           
-      - name: Run summary results
-        run: |
-          echo 'Listing files in resultsTestCases'	
-          ls resultsTestCases
-          echo 'Calling python'	
-          python /home/runner/work/astor/astor/.github/workflows/summaryD4j.py resultsTestCases 
-          
           
       - uses: actions/upload-artifact@v2
         with:
