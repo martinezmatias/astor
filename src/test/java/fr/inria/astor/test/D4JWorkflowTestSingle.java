@@ -329,15 +329,21 @@ public class D4JWorkflowTestSingle {
 			// We rename the file and put in a result folder
 			File foutputnew = new File(dirResults.getAbsolutePath() + File.separator + File.separator + "astor_output_"
 					+ bug_id + "_" + aFL + ".json");
+
 			Files.copy(foutput.toPath(), foutputnew.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
 			//
 			timePerFL.put(aFL, (end - init) / 1000);
 			repairedPerFL.put(aFL, variantsSolutions.size() > 0);
+
+			System.out.println("Saving execution of " + aFL + "results at " + foutputnew);
+
 		}
 		// Save results
 
-		FileWriter fw = new FileWriter(dirResults.getAbsolutePath() + File.separator + "results_" + bug_id + ".json");
+		String fileNameResults = dirResults.getAbsolutePath() + File.separator + "results_" + bug_id + ".json";
+		System.out.println("Saving results at " + fileNameResults);
+		FileWriter fw = new FileWriter(fileNameResults);
 		fw.write("{\"bugid\" :  \" " + bug_id + " \" , \"flacoco_sol\":  \" " + repairedPerFL.get("flacoco")
 				+ " \" , \"flacoco_time\" : " + timePerFL.get("flacoco") + ", \"gzoltar_sol\": \" "
 				+ repairedPerFL.get("gzoltar") + " \" , \"gzoltar_time=\" : " + timePerFL.get("gzoltar")
