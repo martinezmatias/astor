@@ -50,7 +50,15 @@ jobs:
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath82JKali",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath84JKali",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath85JKali",
-          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath95JKali",  		  		
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath95JKali",  	
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart1JKali",     
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart5JKali",  	                
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart13JKali",  
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart15JKali",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart25JKali", 
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart26JKali", 
+          
+          	  		
       ]
 
     steps:
@@ -87,10 +95,25 @@ jobs:
           TZ='America/Los_Angeles'
           export TZ
           
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+			python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+  
+          
+      - name: Run summary results
+        run: python /home/runner/work/astor/astor/.github/workflows/summaryD4j.py ./resultsTestCases
+          
+          
       - uses: actions/upload-artifact@v2
         with:
           name: resultsD4J
           path: resultsTestCases/
+          
+      - uses: actions/upload-artifact@v2
+        with:
+          name: summary.md
+          path: ./resultsTestCases/summary.md
 
       - name: Codecov
         uses: codecov/codecov-action@v1.5.2

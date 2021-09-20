@@ -286,6 +286,7 @@ public class D4JWorkflowTestSingle {
 		if (!dirResults.exists()) {
 			dirResults.mkdirs();
 		}
+		System.out.println("Storing results at " + dirResults.getAbsolutePath());
 
 		configureBuggyProject(bug_id, mvn_option);
 
@@ -337,10 +338,9 @@ public class D4JWorkflowTestSingle {
 		// Save results
 
 		FileWriter fw = new FileWriter(dirResults.getAbsolutePath() + File.separator + "results_" + bug_id + ".json");
-		fw.write("{bugid=" + bug_id
-		//
-				+ ", flacoco_sol=" + repairedPerFL.get("flacoco") + ", flacoco_time=" + timePerFL.get("flacoco")
-				+ ", gzoltar_sol=" + repairedPerFL.get("gzoltar") + ", gzoltar_time=" + timePerFL.get("gzoltar")
+		fw.write("{\"bugid\" :  \" " + bug_id + " \" , \"flacoco_sol\":  \" " + repairedPerFL.get("flacoco")
+				+ " \" , \"flacoco_time\" : " + timePerFL.get("flacoco") + ", \"gzoltar_sol\": \" "
+				+ repairedPerFL.get("gzoltar") + " \" , \"gzoltar_time=\" : " + timePerFL.get("gzoltar")
 
 				+ "}");
 		fw.close();
