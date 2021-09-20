@@ -49,6 +49,8 @@ jobs:
         run: |
           echo 'ls'        
           ls resultsTestCases
+          echo 'ls2 '   
+          ls `pwd`/resultsTestCases
                                 
           
       - uses: actions/upload-artifact@v2
