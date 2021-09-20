@@ -99,9 +99,9 @@ jobs:
           
       - name: Run summary results
         run: |
-        	echo 'Listing files in /home/runner/work/astor/astor/./resultsTestCases'	
-        	ls /home/runner/work/astor/astor/./resultsTestCases
-        	python /home/runner/work/astor/astor/.github/workflows/summaryD4j.py /home/runner/work/astor/astor/./resultsTestCases 
+          echo 'Listing files in /home/runner/work/astor/astor/./resultsTestCases'	
+          ls /home/runner/work/astor/astor/./resultsTestCases
+          python /home/runner/work/astor/astor/.github/workflows/summaryD4j.py /home/runner/work/astor/astor/./resultsTestCases 
           
           
       - uses: actions/upload-artifact@v2
