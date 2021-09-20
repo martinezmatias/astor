@@ -102,7 +102,7 @@ jobs:
   
           
       - name: Run summary results
-        run: python /home/runner/work/astor/astor/.github/workflows/summaryD4j.py /home/runner/work/astor/astor/./resultsTestCases
+        run: python /home/runner/work/astor/astor/.github/workflows/summaryD4j.py /home/runner/work/astor/astor/./resultsTestCases 
           
           
       - uses: actions/upload-artifact@v2
