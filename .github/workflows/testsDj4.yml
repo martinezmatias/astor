@@ -51,7 +51,10 @@ jobs:
           ls resultsTestCases
           echo 'ls2 '   
           ls `pwd`/resultsTestCases
-                                
+          echo `pwd` 
+          echo 'Calling python'	
+          python /home/runner/work/astor/astor/.github/workflows/summaryD4j.py `pwd`/resultsTestCases
+                          
           
       - uses: actions/upload-artifact@v2
         with:
