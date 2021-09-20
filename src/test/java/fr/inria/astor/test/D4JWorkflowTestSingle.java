@@ -30,7 +30,7 @@ public class D4JWorkflowTestSingle {
 
 	@Test
 	public void testMath2() throws Exception {
-		runCompleteJGenProg("Math2", "", 90);
+		runCompleteJGenProg("Math2", "-Dmaven.compiler.source=7 -Dmaven.compiler.target=7", 90);
 	}
 
 	@Test
@@ -40,17 +40,17 @@ public class D4JWorkflowTestSingle {
 
 	@Test
 	public void testMath8() throws Exception {
-		runCompleteJGenProg("Math8", "", 90);
+		runCompleteJGenProg("Math8", "-Dmaven.compiler.source=7 -Dmaven.compiler.target=7", 90);
 	}
 
 	@Test
 	public void testMath28() throws Exception {
-		runCompleteJGenProg("Math28", "", 90);
+		runCompleteJGenProg("Math28", "-Dmaven.compiler.source=7 -Dmaven.compiler.target=7", 90);
 	}
 
 	@Test
 	public void testMath40() throws Exception {
-		runCompleteJGenProg("Math40", "", 90);
+		runCompleteJGenProg("Math40", "-Dmaven.compiler.source=7 -Dmaven.compiler.target=7", 90);
 	}
 
 	@Test
