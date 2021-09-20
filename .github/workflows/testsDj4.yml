@@ -43,7 +43,13 @@ jobs:
           mvn -ff -q surefire:test -DfailIfNoTests=false -Dtest=${{ matrix.test }}
           TZ='America/Los_Angeles'
           export TZ
-                
+
+
+      - name: Run ls
+        run: |
+          echo 'ls'        
+          ls resultsTestCases
+                                
           
       - uses: actions/upload-artifact@v2
         with:
