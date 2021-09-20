@@ -82,10 +82,6 @@ jobs:
         with:
           maven-version: 3.6.0
           
-      - name: removing resultsTestCases
-        run: | 
-         rm -rf resultsTestCases/
-          
 
       - name: Run tests
         run: |
@@ -102,7 +98,10 @@ jobs:
   
           
       - name: Run summary results
-        run: python /home/runner/work/astor/astor/.github/workflows/summaryD4j.py /home/runner/work/astor/astor/./resultsTestCases 
+        run: |
+        	echo 'Listing files in /home/runner/work/astor/astor/./resultsTestCases'	
+        	ls /home/runner/work/astor/astor/./resultsTestCases
+        	python /home/runner/work/astor/astor/.github/workflows/summaryD4j.py /home/runner/work/astor/astor/./resultsTestCases 
           
           
       - uses: actions/upload-artifact@v2
