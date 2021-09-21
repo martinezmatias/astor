@@ -47,8 +47,8 @@ jobs:
         run: |
           $LV = $LV/"test2"
           echo $LV 
-		env: 
-		  LV: "test"
+        env: 
+          LV: "test"
 		
       - name: Display the path
         run: |
