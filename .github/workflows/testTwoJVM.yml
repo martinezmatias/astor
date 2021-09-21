@@ -51,7 +51,7 @@ jobs:
       - name: running env var
         run: |
           import os
-          print(os.getenv([SRC_VERSION])
+          print(os.getenv('SRC_VERSION'))
         shell: python
                      
 
