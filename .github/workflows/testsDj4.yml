@@ -69,3 +69,14 @@ jobs:
 
       - name: Codecov
         uses: codecov/codecov-action@v1.5.2
+  
+  attheend:
+    needs: build
+    steps:
+      - name: Run ls
+          echo 'At the end ls'        
+          ls resultsTestCases
+          echo 'at the end ls2 '   
+          ls `pwd`/resultsTestCases
+          echo `pwd` 
+         
