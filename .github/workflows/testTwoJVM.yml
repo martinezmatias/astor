@@ -34,8 +34,20 @@ jobs:
       - name: Install Java 7
         run: |
           wget -O $RUNNER_TEMP/java_package.tar.gz https://download.java.net/openjdk/jdk7u75/ri/openjdk-7u75-b13-linux-x64-18_dec_2014.tar.gz
-         # tar -xzvf  openjdk-7u75-b13-linux-x64-18_dec_2014.tar.gz     
-         # ls java-se-7u75-ri      
+          tar -xzvf  $RUNNER_TEMP/java_package.tar.gz    
+          ls $RUNNER_TEMP/java-se-7u75-ri      
+
+      - name: run
+        run: |
+          $RUNNER_TEMP/java-se-7u75-ri/bin/java -version
+          
+      - name: running env var
+        run: |
+          import os
+          print(os.environ[SRC_VERSION])
+        shell: python
+        env:
+          SRC_VERSION: $RUNNER_TEMP/java-se-7u75-ri/bin/java                 
 
 # https://github.com/marketplace/actions/setup-adoptopenjdk
       - uses: actions/checkout@v2
