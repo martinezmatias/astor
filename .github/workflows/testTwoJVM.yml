@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      SRC_VERSION: `$RUNNER_TEMP`/java-se-7u75-ri/bin/java   
+      SRC_VERSION: $RUNNER_TEMP/java-se-7u75-ri/bin/java   
 
     steps:
 
