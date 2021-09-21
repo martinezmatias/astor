@@ -282,7 +282,7 @@ public class D4JWorkflowTestSingle {
 	public static void runComplete(String bug_id, String mvn_option, String approach, int timeout) throws Exception {
 		System.out.println("\n****\nRunning repair attempt for " + bug_id);
 
-		System.out.println("Env var " + System.getenv("LV"));
+		System.out.println("Env var " + System.getenv("J7PATH"));
 		File dirResults = new File("./resultsTestCases");
 		if (!dirResults.exists()) {
 			dirResults.mkdirs();
@@ -305,7 +305,7 @@ public class D4JWorkflowTestSingle {
 			CommandSummary cs = createCommand(bug_id, approach, timeout,
 					("flacoco".equals(aFL) ? "fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization"
 							: aFL));
-
+			cs.command.put("-jvm4testexecution", System.getenv("J7PATH"));
 			AstorMain main1 = new AstorMain();
 
 			long init = System.currentTimeMillis();

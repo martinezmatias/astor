@@ -45,18 +45,11 @@ jobs:
       - name: run Java 7
         run: |
           $RUNNER_TEMP/java-se-7u75-ri/bin/java -version		
-          
-      - name: run2
-        run: |
-          echo $LV
-          export LV=test2
-          echo $LV
-
          
       - name: Run tests
         run: |
-          export LV=$RUNNER_TEMP/java-se-7u75-ri/bin 
-          echo $LV 
+          export J7PATH=$RUNNER_TEMP/java-se-7u75-ri/bin 
+          echo $J7PATH 
           mvn -ff -q clean
           mvn -ff -q test -DskipTests -DfailIfNoTests=false
           mvn -ff -q surefire:test -DfailIfNoTests=false -Dtest=${{ matrix.test }}
