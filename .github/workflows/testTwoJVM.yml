@@ -30,13 +30,18 @@ jobs:
       - name: Java Second call with Java 11
         run: |
           echo 'test Java 11'
-          java -version   
+          java -version 
+      - name: Install Java 7
+        run: |
+          wget https://download.java.net/openjdk/jdk7u75/ri/openjdk-7u75-b13-linux-x64-18_dec_2014.tar.gz
+          tar -xzvf  openjdk-7u75-b13-linux-x64-18_dec_2014.tar.gz     
+          ls java-se-7u75-ri      
 
 # https://github.com/marketplace/actions/setup-adoptopenjdk
       - uses: actions/checkout@v2
-      - uses: joschi/setup-jdk@v2
+      - uses: actions/setup-java@v1
         with:
-          java-version: '8'
+          java-version: '7'
           architecture: x64
-
+          jdkFile: java-se-7u75-ri
       - run: java -version
