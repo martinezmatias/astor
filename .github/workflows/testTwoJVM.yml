@@ -6,6 +6,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      SRC_VERSION: $RUNNER_TEMP/java-se-7u75-ri/bin/java   
 
     steps:
 
@@ -46,8 +48,7 @@ jobs:
           import os
           print(os.environ[SRC_VERSION])
         shell: python
-        env:
-          SRC_VERSION: $RUNNER_TEMP/java-se-7u75-ri/bin/java                 
+                     
 
 # https://github.com/marketplace/actions/setup-adoptopenjdk
       - uses: actions/checkout@v2
