@@ -49,9 +49,10 @@ jobs:
         shell: python          
       - name: run2
         run: |
-          #$LV = $LV/test2
-          
-          echo $LV 
+          echo $LV
+          export LV=test2
+          echo $LV
+           
         env: 
           LV: test     
       - name: running env var
