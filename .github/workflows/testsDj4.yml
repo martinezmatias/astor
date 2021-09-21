@@ -55,7 +55,7 @@ jobs:
          
       - name: Run tests
         run: |
-          export LV=echo $RUNNER_TEMP/java-se-7u75-ri 
+          export LV=$RUNNER_TEMP/java-se-7u75-ri/bin 
           echo $LV 
           mvn -ff -q clean
           mvn -ff -q test -DskipTests -DfailIfNoTests=false
