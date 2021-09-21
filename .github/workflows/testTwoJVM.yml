@@ -42,14 +42,7 @@ jobs:
       - name: run
         run: |
           $RUNNER_TEMP/java-se-7u75-ri/bin/java -version
-          
-      - name: run2
-        run: |
-          $LV = $LV/test2
-          echo $LV 
-        env: 
-          LV: test
-          		
+ 		
       - name: Display the path
         run: |
           import os
