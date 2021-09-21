@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      SRC_VERSION: $RUNNER_TEMP/java-se-7u75-ri/bin/java   
+      SRC_VERSION: `$RUNNER_TEMP`/java-se-7u75-ri/bin/java   
 
     steps:
 
@@ -42,12 +42,16 @@ jobs:
       - name: run
         run: |
           $RUNNER_TEMP/java-se-7u75-ri/bin/java -version
+          
+      - name: run2
+        run: |
+          `$RUNNER_TEMP`/java-se-7u75-ri/bin/java -version
 
       - name: Display the path
-	    run: |
-	      import os
-	      print(os.environ['PATH'])
-	    shell: python          
+        run: |
+          import os
+          print(os.environ['PATH'])
+        shell: python          
       
       - name: running env var
         run: |
