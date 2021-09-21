@@ -41,8 +41,7 @@ jobs:
 
       - name: run
         run: |
-          $RUNNER_TEMP/java-se-7u75-ri/bin/java -version
- 		
+          $RUNNER_TEMP/java-se-7u75-ri/bin/java -version		
       - name: Display the path
         run: |
           import os
