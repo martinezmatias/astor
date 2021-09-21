@@ -73,7 +73,8 @@ jobs:
   attheend:
     needs: build
     steps:
-      - name: Run ls
+      - name: Run ls after
+        run: |
           echo 'At the end ls'        
           ls resultsTestCases
           echo 'at the end ls2 '   
