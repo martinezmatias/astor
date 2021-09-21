@@ -32,11 +32,11 @@ jobs:
           echo 'test Java 11'
           java -version   
 
-
+# https://github.com/marketplace/actions/setup-adoptopenjdk
       - uses: actions/checkout@v2
       - uses: joschi/setup-jdk@v2
         with:
-          java-version: '7'
+          java-version: '8'
           architecture: x64
 
       - run: java -version
