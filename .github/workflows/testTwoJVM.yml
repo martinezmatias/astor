@@ -42,7 +42,13 @@ jobs:
       - name: run
         run: |
           $RUNNER_TEMP/java-se-7u75-ri/bin/java -version
-          
+
+      - name: Display the path
+	    run: |
+	      import os
+	      print(os.environ['PATH'])
+	    shell: python          
+      
       - name: running env var
         run: |
           import os
