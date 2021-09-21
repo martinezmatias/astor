@@ -35,8 +35,8 @@ jobs:
         uses: stCarolas/setup-maven@v4
         with:
           maven-version: 3.6.0
-          
 
+         
       - name: Run tests
         run: |
           mvn -ff -q clean
@@ -48,6 +48,9 @@ jobs:
 
       - name: Run ls
         run: |
+          filename=`pwd`/resultsTestCases/summary.md
+          test -f $filename || touch $filename	|| '| bugid  | Flacoco finds solution  | Flacoco time  |  Gzoltar finds solution | Gzoltar time  |\n |---|---|---|---|---|\n' >> `pwd`/resultsTestCases/summary.md
+          cat `pwd`/resultsTestCases/summary.md
           echo 'ls'        
           ls resultsTestCases
           echo 'ls2 '   
@@ -70,15 +73,4 @@ jobs:
       - name: Codecov
         uses: codecov/codecov-action@v1.5.2
   
-  attheend:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Run ls after
-        run: |
-          echo 'At the end ls'        
-          ls resultsTestCases
-          echo 'at the end ls2 '   
-          ls `pwd`/resultsTestCases
-          echo `pwd` 
          

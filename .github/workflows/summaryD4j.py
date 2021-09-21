@@ -7,8 +7,7 @@ print(sys.argv)
 
 resultDir = sys.argv[1]
 
-resultS = "| bugid  | Flacoco finds solution  | Flacoco time  |  Gzoltar finds solution | Gzoltar time  |\n"
-resultS += "|---|---|---|---|---|\n"
+resultS = ""
 
 print("Summary results from {} ".format(resultDir))
 
@@ -23,7 +22,7 @@ for file in os.listdir(resultDir):
 
 
 outFileSummary = os.path.join(resultDir, "summary.md")
-with open(outFileSummary, "w") as fout:
+with open(outFileSummary, "a") as fout:
 	fout.write(resultS)
 	fout.close()
 
