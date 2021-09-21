@@ -282,6 +282,7 @@ public class D4JWorkflowTestSingle {
 	public static void runComplete(String bug_id, String mvn_option, String approach, int timeout) throws Exception {
 		System.out.println("\n****\nRunning repair attempt for " + bug_id);
 
+		System.out.println("Env var " + System.getenv("LV"));
 		File dirResults = new File("./resultsTestCases");
 		if (!dirResults.exists()) {
 			dirResults.mkdirs();

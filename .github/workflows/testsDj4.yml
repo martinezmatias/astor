@@ -36,9 +36,27 @@ jobs:
         with:
           maven-version: 3.6.0
 
+      - name: Install Java 7
+        run: |
+          wget -O $RUNNER_TEMP/java_package.tar.gz https://download.java.net/openjdk/jdk7u75/ri/openjdk-7u75-b13-linux-x64-18_dec_2014.tar.gz
+          tar -xzvf  $RUNNER_TEMP/java_package.tar.gz  -C  $RUNNER_TEMP/
+          ls $RUNNER_TEMP/java-se-7u75-ri      
+
+      - name: run Java 7
+        run: |
+          $RUNNER_TEMP/java-se-7u75-ri/bin/java -version		
+          
+      - name: run2
+        run: |
+          echo $LV
+          export LV=test2
+          echo $LV
+
          
       - name: Run tests
         run: |
+          export LV=echo $RUNNER_TEMP/java-se-7u75-ri 
+          echo $LV 
           mvn -ff -q clean
           mvn -ff -q test -DskipTests -DfailIfNoTests=false
           mvn -ff -q surefire:test -DfailIfNoTests=false -Dtest=${{ matrix.test }}
