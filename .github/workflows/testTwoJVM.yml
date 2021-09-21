@@ -47,7 +47,12 @@ jobs:
           import os
           print(os.environ['PATH'])
         shell: python          
-      
+      - name: run2
+        run: |
+          $LV = $LV/test2
+          echo $LV 
+        env: 
+          LV: test     
       - name: running env var
         run: |
           import os
