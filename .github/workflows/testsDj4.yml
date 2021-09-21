@@ -49,7 +49,7 @@ jobs:
       - name: Run ls
         run: |
           filename=`pwd`/resultsTestCases/summary.md
-          test -f $filename || touch $filename	&& '| bugid  | Flacoco finds solution  | Flacoco time  |  Gzoltar finds solution | Gzoltar time  |\n |---|---|---|---|---|\n' >> `pwd`/resultsTestCases/summary.md
+          test -f $filename || touch $filename	&&  echo "| bugid  | Flacoco finds solution  | Flacoco time  |  Gzoltar finds solution | Gzoltar time  |\n |---|---|---|---|---|\n" >> `pwd`/resultsTestCases/summary.md
           cat `pwd`/resultsTestCases/summary.md
           echo 'ls'        
           ls resultsTestCases
