@@ -31,3 +31,12 @@ jobs:
         run: |
           echo 'test Java 11'
           java -version   
+
+
+      - uses: actions/checkout@v2
+      - uses: joschi/setup-jdk@v2
+        with:
+          java-version: '7'
+          architecture: x64
+
+      - run: java -version
