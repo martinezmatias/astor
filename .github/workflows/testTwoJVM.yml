@@ -33,7 +33,7 @@ jobs:
           java -version 
       - name: Install Java 7
         run: |
-          wget https://download.java.net/openjdk/jdk7u75/ri/openjdk-7u75-b13-linux-x64-18_dec_2014.tar.gz
+          wget wget -O $RUNNER_TEMP/java_package.tar.gz https://download.java.net/openjdk/jdk7u75/ri/openjdk-7u75-b13-linux-x64-18_dec_2014.tar.gz
          # tar -xzvf  openjdk-7u75-b13-linux-x64-18_dec_2014.tar.gz     
          # ls java-se-7u75-ri      
 
@@ -43,5 +43,5 @@ jobs:
         with:
           java-version: '7'
           architecture: x64
-          jdkFile: openjdk-7u75-b13-linux-x64-18_dec_2014.tar.gz  
+          jdkFile: ${{ runner.temp }}/java_package.tar.gz
       - run: java -version
