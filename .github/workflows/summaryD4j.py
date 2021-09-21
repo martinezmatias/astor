@@ -10,7 +10,7 @@ resultDir = sys.argv[1]
 resultS = ""
 
 print("Summary results from {} ".format(resultDir))
-
+print("Files from {}: ({}) {}".format(resultDir,size(os.listdir(resultDir)), os.listdir(resultDir) ))
 for file in os.listdir(resultDir):
 
 	if str(file).startswith("results_") and str(file).endswith("json"):
