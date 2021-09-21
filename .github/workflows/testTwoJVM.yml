@@ -45,10 +45,10 @@ jobs:
           
       - name: run2
         run: |
-          $LV = $LV/"test2"
+          $LV = $LV/test2
           echo $LV 
         env: 
-          LV: "test"
+          LV: test
           		
       - name: Display the path
         run: |
