@@ -34,8 +34,8 @@ jobs:
       - name: Install Java 7
         run: |
           wget https://download.java.net/openjdk/jdk7u75/ri/openjdk-7u75-b13-linux-x64-18_dec_2014.tar.gz
-          tar -xzvf  openjdk-7u75-b13-linux-x64-18_dec_2014.tar.gz     
-          ls java-se-7u75-ri      
+         # tar -xzvf  openjdk-7u75-b13-linux-x64-18_dec_2014.tar.gz     
+         # ls java-se-7u75-ri      
 
 # https://github.com/marketplace/actions/setup-adoptopenjdk
       - uses: actions/checkout@v2
@@ -43,5 +43,5 @@ jobs:
         with:
           java-version: '7'
           architecture: x64
-          jdkFile: java-se-7u75-ri
+          jdkFile: openjdk-7u75-b13-linux-x64-18_dec_2014.tar.gz  
       - run: java -version
