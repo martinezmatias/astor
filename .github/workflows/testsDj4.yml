@@ -5,6 +5,9 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    env:
+      TZ: America/Los_Angeles
 
     strategy:
       fail-fast: false
@@ -14,7 +17,6 @@ jobs:
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath5",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath8",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath28",
-          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath32",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath40",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath49",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath50",
@@ -41,6 +43,7 @@ jobs:
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath2JKali",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath8JKali",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath28JKali",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath32JKali",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath40JKali",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath49JKali",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath50JKali",
@@ -94,11 +97,12 @@ jobs:
         run: |
           export J7PATH=$RUNNER_TEMP/java-se-7u75-ri/bin 
           echo $J7PATH 
+          TZ='America/Los_Angeles'
+          export TZ
           mvn -ff -q clean
           mvn -ff -q test -DskipTests -DfailIfNoTests=false
           mvn -ff -q surefire:test -DfailIfNoTests=false -Dtest=${{ matrix.test }}
-          TZ='America/Los_Angeles'
-          export TZ
+        
 
 
       - name: Run ls
