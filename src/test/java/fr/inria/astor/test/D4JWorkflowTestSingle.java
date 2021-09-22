@@ -24,6 +24,13 @@ import fr.inria.astor.core.entities.ProgramVariant;
 import fr.inria.main.CommandSummary;
 import fr.inria.main.evolution.AstorMain;
 
+/**
+ * Execution of results from
+ * https://github.com/Spirals-Team/defects4j-repair/tree/master/results/2015-august
+ * 
+ * @author Matias Martinez
+ *
+ */
 public class D4JWorkflowTestSingle {
 
 	public String bugidParametrized;
