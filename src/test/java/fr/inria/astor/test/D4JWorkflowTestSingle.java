@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Level;
 import org.junit.Test;
 
 import fr.inria.astor.core.entities.ProgramVariant;
@@ -306,7 +307,7 @@ public class D4JWorkflowTestSingle {
 
 		configureBuggyProject(bug_id, mvn_option);
 
-		String[] faultLocalization = new String[] { "gzoltar", "flacoco" };
+		String[] faultLocalization = new String[] { "gzoltar" }; // , "flacoco"
 
 		boolean hasSolution = false;
 
@@ -326,6 +327,8 @@ public class D4JWorkflowTestSingle {
 
 			long init = System.currentTimeMillis();
 			try {
+				org.apache.log4j.LogManager.getRootLogger().setLevel(Level.DEBUG);
+
 				main1.execute(cs.flat());
 			} catch (Exception e) {
 				e.printStackTrace();
