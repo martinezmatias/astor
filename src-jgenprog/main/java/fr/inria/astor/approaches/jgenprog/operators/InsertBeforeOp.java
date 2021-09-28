@@ -6,7 +6,9 @@ import fr.inria.astor.core.entities.ProgramVariant;
 import fr.inria.astor.core.entities.StatementOperatorInstance;
 import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtConstructorCall;
+import spoon.reflect.code.CtInvocation;
 import spoon.reflect.code.CtStatement;
+import spoon.reflect.reference.CtExecutableReference;
 
 /**
  * 
@@ -24,6 +26,13 @@ public class InsertBeforeOp extends InsertStatementOp {
 		CtBlock parentBlock = stmtoperator.getParentBlock();
 
 		if (parentBlock != null) {
+
+			if (ctst instanceof CtInvocation && ((CtInvocation<?>) ctst).getExecutable().getSimpleName()
+					.startsWith(CtExecutableReference.CONSTRUCTOR_NAME)) {
+				log.error("Cannot insert before an Super or this: " + ctst);
+				return false;
+			}
+
 			ctst.insertBefore((CtStatement) fix);
 			fix.setParent(parentBlock);
 			successful = true;
