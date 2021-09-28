@@ -205,6 +205,8 @@ public class D4JWorkflowTestSingle {
 	public void testMath40JKali() throws Exception {
 		CommandSummary cs = new CommandSummary();
 		cs.command.putIfAbsent("-flthreshold", "0");
+		cs.command.put("-logtestexecution", "true");
+
 		runComplete("Math40", "", "jKali", 30, cs);
 	}
 
