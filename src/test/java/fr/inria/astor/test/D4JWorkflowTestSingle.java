@@ -176,6 +176,7 @@ public class D4JWorkflowTestSingle {
 	public void testMath2JKali() throws Exception {
 		CommandSummary cs = new CommandSummary();
 		cs.command.putIfAbsent("-flthreshold", "0.0");
+		cs.command.putIfAbsent("-javacompliancelevel", "5");
 		runComplete("Math2", "", "jKali", 30, cs);
 	}
 
