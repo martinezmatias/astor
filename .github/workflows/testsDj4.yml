@@ -18,6 +18,7 @@ jobs:
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath28JKali", 
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath32JKali", 
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath40JKali", 
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testTime11JKali", 
              	  		
       ]
 
