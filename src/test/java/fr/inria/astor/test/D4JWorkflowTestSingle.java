@@ -257,7 +257,9 @@ public class D4JWorkflowTestSingle {
 
 	@Test
 	public void testTime11JKali() throws Exception {
-		runComplete("Time11", "", "jKali", 30);
+		CommandSummary cs = new CommandSummary();
+		cs.command.putIfAbsent("-flthreshold", "0");
+		runComplete("Time11", "", "jKali", 30, cs);
 	}
 
 	@Test
