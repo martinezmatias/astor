@@ -181,22 +181,30 @@ public class D4JWorkflowTestSingle {
 
 	@Test
 	public void testMath8JKali() throws Exception {
-		runComplete("Math8", "", "jKali", 30);
+		CommandSummary cs = new CommandSummary();
+		cs.command.putIfAbsent("-flthreshold", "0");
+		runComplete("Math8", "", "jKali", 30, cs);
 	}
 
 	@Test
 	public void testMath28JKali() throws Exception {
-		runComplete("Math28", "", "jKali", 30);
+		CommandSummary cs = new CommandSummary();
+		cs.command.putIfAbsent("-flthreshold", "0");
+		runComplete("Math28", "", "jKali", 30, cs);
 	}
 
 	@Test
 	public void testMath32JKali() throws Exception {
-		runComplete("Math32", "", "jKali", 30);
+		CommandSummary cs = new CommandSummary();
+		cs.command.putIfAbsent("-flthreshold", "0");
+		runComplete("Math32", "", "jKali", 30, cs);
 	}
 
 	@Test
 	public void testMath40JKali() throws Exception {
-		runComplete("Math40", "", "jKali", 30);
+		CommandSummary cs = new CommandSummary();
+		cs.command.putIfAbsent("-flthreshold", "0");
+		runComplete("Math40", "", "jKali", 30, cs);
 	}
 
 	@Test
@@ -241,7 +249,9 @@ public class D4JWorkflowTestSingle {
 
 	@Test
 	public void testMath95JKali() throws Exception {
-		runComplete("Math95", "", "jKali", 30);
+		CommandSummary cs = new CommandSummary();
+		cs.command.putIfAbsent("-flthreshold", "0");
+		runComplete("Math95", "", "jKali", 30, cs);
 	}
 
 	@Test
