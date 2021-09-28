@@ -173,7 +173,9 @@ public class D4JWorkflowTestSingle {
 	//
 	@Test
 	public void testMath2JKali() throws Exception {
-		runComplete("Math2", "", "jKali", 30);
+		CommandSummary cs = new CommandSummary();
+		cs.command.putIfAbsent("-flthreshold", "0.0");
+		runComplete("Math2", "", "jKali", 30, cs);
 	}
 
 	@Test
@@ -287,6 +289,12 @@ public class D4JWorkflowTestSingle {
 	}
 
 	public static void runComplete(String bug_id, String mvn_option, String approach, int timeout) throws Exception {
+		CommandSummary cs = new CommandSummary();
+		runComplete(bug_id, mvn_option, approach, timeout, cs);
+	}
+
+	public static void runComplete(String bug_id, String mvn_option, String approach, int timeout, CommandSummary cs)
+			throws Exception {
 		System.out.println("\n****\nRunning repair attempt for " + bug_id);
 
 		System.out.println("Env var " + System.getenv("J7PATH"));
@@ -309,9 +317,10 @@ public class D4JWorkflowTestSingle {
 
 			System.out.println("Running on FL : " + aFL);
 
-			CommandSummary cs = createCommand(bug_id, approach, timeout,
+			createCommand(bug_id, approach, timeout,
 					("flacoco".equals(aFL) ? "fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization"
-							: aFL));
+							: aFL),
+					cs);
 			cs.command.put("-jvm4testexecution", System.getenv("J7PATH"));
 			AstorMain main1 = new AstorMain();
 
@@ -405,8 +414,8 @@ public class D4JWorkflowTestSingle {
 		}
 	}
 
-	public static CommandSummary createCommand(String bug_id, String approach, int timeout, String faultLocalization)
-			throws IOException, FileNotFoundException {
+	public static CommandSummary createCommand(String bug_id, String approach, int timeout, String faultLocalization,
+			CommandSummary cs) throws IOException, FileNotFoundException {
 		Properties prop = new Properties();
 		String locationProject = "./tempdj4/" + bug_id;
 		prop.load(new FileInputStream(locationProject + "/defects4j.build.properties"));
@@ -453,34 +462,34 @@ public class D4JWorkflowTestSingle {
 
 		System.out.println(depStrings);
 
-		CommandSummary cs = new CommandSummary();
-		cs.command.put("-id", bug_id);
-		cs.command.put("-mode", approach);
-		cs.command.put("-srcjavafolder", src);
-		cs.command.put("-srctestfolder", srcTst);
-		cs.command.put("-binjavafolder", classBin);
-		cs.command.put("-bintestfolder", testBin);
+		cs.command.putIfAbsent("-id", bug_id);
+		cs.command.putIfAbsent("-mode", approach);
+		cs.command.putIfAbsent("-srcjavafolder", src);
+		cs.command.putIfAbsent("-srctestfolder", srcTst);
+		cs.command.putIfAbsent("-binjavafolder", classBin);
+		cs.command.putIfAbsent("-bintestfolder", testBin);
 
-		cs.command.put("-location", locationProject);
-		cs.command.put("-dependencies", depStrings);
-		cs.command.put("-maxgen", "10000");
-		cs.command.put("-stopfirst", "true");
-		cs.command.put("-loglevel", "DEBUG");
+		cs.command.putIfAbsent("-location", locationProject);
+		cs.command.putIfAbsent("-dependencies", depStrings);
+		cs.command.putIfAbsent("-maxgen", "10000");
+		cs.command.putIfAbsent("-stopfirst", "true");
+		cs.command.putIfAbsent("-loglevel", "DEBUG");
 		// cs.command.put("-package", "org.apache.commons");
-		cs.command.put("-maxtime", new Integer(timeout).toString());
+		cs.command.putIfAbsent("-maxtime", new Integer(timeout).toString());
 
-		cs.command.put("-faultlocalization", faultLocalization);
+		cs.command.putIfAbsent("-faultlocalization", faultLocalization);
 
-		cs.command.put("-javacompliancelevel", "7");
+		cs.command.putIfAbsent("-javacompliancelevel", "7");
 
-		cs.command.put("-population", "1");
-		cs.command.put("-flthreshold", "0.1");
-		cs.command.put("-seed", "10");
-		cs.command.put("-tmax1", "30000");
+		cs.command.putIfAbsent("-population", "1");
+		cs.command.putIfAbsent("-flthreshold", "0.1");
+		cs.command.putIfAbsent("-seed", "10");
+		cs.command.putIfAbsent("-tmax1", "30000");
+
+		cs.command.putIfAbsent("-ignoredtestcases", "org.apache.commons.math.util.FastMathTest");
 
 		System.out.println("\nConfiguration " + cs.command.toString());
 
-		cs.command.put("-ignoredtestcases", "org.apache.commons.math.util.FastMathTest");
 		// org.apache.commons.math.util.FastMathTest#checkMissingFastMathClasses
 		return cs;
 	}
