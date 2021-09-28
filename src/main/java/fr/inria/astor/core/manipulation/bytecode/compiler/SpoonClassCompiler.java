@@ -17,7 +17,6 @@ import fr.inria.astor.core.manipulation.bytecode.entities.CompilationResult;
 import fr.inria.astor.core.setup.ConfigurationProperties;
 import fr.inria.astor.core.solutionsearch.extension.VariantCompiler;
 import spoon.processing.ProcessingManager;
-import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
@@ -52,7 +51,8 @@ public class SpoonClassCompiler implements VariantCompiler {
 
 	@Override
 	public CompilationResult compile(ProgramVariant instance, URL[] cp) {
-		List<CtClass> ctClasses = new ArrayList<CtClass>(instance.getBuiltClasses().values());
+		List<CtType<?>> ctClasses = instance.getAffectedClasses();
+
 		CompilationResult compilation2 = this.compile(ctClasses, cp);
 
 		return compilation2;

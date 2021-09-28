@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import fr.inria.astor.core.entities.validation.VariantValidationResult;
 import fr.inria.astor.core.manipulation.bytecode.entities.CompilationResult;
@@ -44,13 +46,13 @@ public class ProgramVariant {
 	protected int id = 0;
 
 	/**
-	 * List of gens (statements that can be modified for finding a patch) of the
-	 * program
+	 * List of modification points (statements that can be modified for finding a
+	 * patch) of the program
 	 */
 	protected List<ModificationPoint> modificationPoints = null;
 	/**
 	 * Reference to the loaded classes from the spoon model. The classes are shared
-	 * by all variants, a s consequence, it does not have changes of any variant.
+	 * by all variants, as consequence, it does not stores changes of any variant.
 	 */
 	protected Map<String, CtClass> loadClasses = new HashMap<String, CtClass>();
 
@@ -210,11 +212,15 @@ public class ProgramVariant {
 	 * @return
 	 */
 	public List<CtType<?>> getAffectedClasses() {
-		List<CtType<?>> r = new ArrayList<CtType<?>>();
-		for (CtClass c : loadClasses.values()) {
-			r.add(c);
+
+		Set<CtType<?>> affectedClassesSet = new HashSet<CtType<?>>();
+		for (OperatorInstance anOperation : this.getAllOperations()) {
+			ModificationPoint aModifPoint = anOperation.getModificationPoint();
+			affectedClassesSet.add(aModifPoint.getCtClass());
 		}
-		return Collections.unmodifiableList(r);
+
+		List<CtType<?>> affectedClasses = new ArrayList<CtType<?>>(affectedClassesSet);
+		return Collections.unmodifiableList(affectedClasses);
 	}
 
 	public boolean isSolution() {
