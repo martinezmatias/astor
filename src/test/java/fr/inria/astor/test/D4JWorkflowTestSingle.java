@@ -205,14 +205,14 @@ public class D4JWorkflowTestSingle {
 	public void testMath40JKali() throws Exception {
 		CommandSummary cs = new CommandSummary();
 		cs.command.putIfAbsent("-flthreshold", "0");
-		// cs.command.put("-logtestexecution", "true");
 		cs.command.put("-parameters", "logtestexecution:true");
-//testDecreasingSteps(org.apache.commons.math.ode.nonstiff.ClassicalRungeKuttaIntegratorTest): null-, testDecreasingSteps(c): null-, testEvents(org.apache.commons.math.ode.nonstiff.HighamHall54IntegratorTest): null-, testDecreasingSteps(org.apache.commons.math.ode.nonstiff.ThreeEighthesIntegratorTest
+
 		cs.command.put("-ignoredtestcases",
 				"org.apache.commons.math.util.FastMathTest" + File.pathSeparator
 						+ "org.apache.commons.math.ode.nonstiff.ClassicalRungeKuttaIntegratorTest" + File.pathSeparator
 						+ "org.apache.commons.math.ode.nonstiff.GillIntegratorTest" + File.pathSeparator
-						+ "org.apache.commons.math.ode.nonstiff.ThreeEighthesIntegratorTest");
+						+ "org.apache.commons.math.ode.nonstiff.ThreeEighthesIntegratorTest" + File.pathSeparator
+						+ "org.apache.commons.math.ode.nonstiff.HighamHall54IntegratorTest");
 		runComplete("Math40", "", "jKali", 30, cs);
 	}
 
