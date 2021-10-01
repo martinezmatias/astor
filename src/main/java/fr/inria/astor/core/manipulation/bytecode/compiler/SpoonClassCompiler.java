@@ -51,7 +51,7 @@ public class SpoonClassCompiler implements VariantCompiler {
 
 	@Override
 	public CompilationResult compile(ProgramVariant instance, URL[] cp) {
-		List<CtType<?>> ctClasses = instance.getAffectedClasses();
+		List<CtType<?>> ctClasses = instance.getClassesToCompile();
 
 		CompilationResult compilation2 = this.compile(ctClasses, cp);
 
