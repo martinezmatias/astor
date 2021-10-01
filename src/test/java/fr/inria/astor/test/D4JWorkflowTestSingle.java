@@ -58,7 +58,16 @@ public class D4JWorkflowTestSingle {
 
 	@Test
 	public void testMath40() throws Exception {
-		runCompleteJGenProg("Math40", "-Dmaven.compiler.source=7 -Dmaven.compiler.target=7", 90);
+		CommandSummary cs = new CommandSummary();
+		cs.command.putIfAbsent("-flthreshold", "0");
+		cs.command.put("-parameters", "logtestexecution:true");
+		cs.command.put("-ignoredtestcases",
+				"org.apache.commons.math.util.FastMathTest" + File.pathSeparator
+						+ "org.apache.commons.math.ode.nonstiff.ClassicalRungeKuttaIntegratorTest" + File.pathSeparator
+						+ "org.apache.commons.math.ode.nonstiff.GillIntegratorTest" + File.pathSeparator
+						+ "org.apache.commons.math.ode.nonstiff.ThreeEighthesIntegratorTest" + File.pathSeparator
+						+ "org.apache.commons.math.ode.nonstiff.HighamHall54IntegratorTest");
+		runComplete("Math40", "-Dmaven.compiler.source=7 -Dmaven.compiler.target=7", "jGenProg", 90, cs);
 	}
 
 	@Test
@@ -206,7 +215,6 @@ public class D4JWorkflowTestSingle {
 		CommandSummary cs = new CommandSummary();
 		cs.command.putIfAbsent("-flthreshold", "0");
 		cs.command.put("-parameters", "logtestexecution:true");
-
 		cs.command.put("-ignoredtestcases",
 				"org.apache.commons.math.util.FastMathTest" + File.pathSeparator
 						+ "org.apache.commons.math.ode.nonstiff.ClassicalRungeKuttaIntegratorTest" + File.pathSeparator
@@ -328,7 +336,7 @@ public class D4JWorkflowTestSingle {
 
 		configureBuggyProject(bug_id, mvn_option);
 
-		String[] faultLocalization = new String[] { "gzoltar" }; // , "flacoco"
+		String[] faultLocalization = new String[] { "gzoltar", "flacoco" };
 
 		boolean hasSolution = false;
 
@@ -510,13 +518,16 @@ public class D4JWorkflowTestSingle {
 		cs.command.putIfAbsent("-seed", "10");
 		cs.command.putIfAbsent("-tmax1", "30000");
 
-		cs.command.putIfAbsent("-ignoredtestcases", "org.apache.commons.math.util.FastMathTest");
+		if (cs.command.containsValue("-ignoredtestcases")) {
 
+		} else {
+
+			cs.command.putIfAbsent("-ignoredtestcases", "org.apache.commons.math.util.FastMathTest");
+		}
 		System.out.println("\nConfiguration " + cs.command.toString());
 
 		cs.append("-parameters", "logtestexecution:true");
 
-		// org.apache.commons.math.util.FastMathTest#checkMissingFastMathClasses
 		return cs;
 	}
 

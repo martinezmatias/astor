@@ -13,12 +13,53 @@ jobs:
       fail-fast: false
       matrix:
         test: [ 
-          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath2JKali", 
-          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath8JKali", 
-          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath28JKali", 
-          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath32JKali", 
-          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath40JKali", 
-          "fr.inria.astor.test.D4JWorkflowTestSingle#testTime11JKali", 
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath2",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath5",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath8",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath28",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath32",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath40",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath49",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath50",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath53",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath70",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath71",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath73",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath78",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath80",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath81",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath82",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath84",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath85",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath95",    
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart1",   
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart3",  
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart5",  	 
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart7",                  
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart13",  
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart15",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart25", 
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testTime4",  
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testTime11", 
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath2JKali",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath8JKali",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath28JKali",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath40JKali",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath49JKali",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath50JKali",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath78JKali",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath80JKali",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath81JKali",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath82JKali",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath84JKali",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath85JKali",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath95JKali",  	
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart1JKali",     
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart5JKali",  	                
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart13JKali",  
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart15JKali",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart25JKali", 
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart26JKali",  
              	  		
       ]
 
@@ -62,32 +103,13 @@ jobs:
           mvn -ff -q clean
           mvn -ff -q test -DskipTests -DfailIfNoTests=false
           mvn -ff -q surefire:test -DfailIfNoTests=false -Dtest=${{ matrix.test }}
-        
-
-
-      - name: Run ls
-        run: |
-          filename=`pwd`/resultsTestCases/summary.md
-          test -f $filename || touch $filename	&&  echo "| bugid  | Flacoco finds solution  | Flacoco time  |  Gzoltar finds solution | Gzoltar time  |\n |---|---|---|---|---|\n" >> `pwd`/resultsTestCases/summary.md
-          cat `pwd`/resultsTestCases/summary.md
-          echo 'ls'        
-          ls resultsTestCases
-          echo 'ls2 '   
-          ls `pwd`/resultsTestCases
-          echo `pwd` 
-          echo 'Calling python'	
-          python /home/runner/work/astor/astor/.github/workflows/summaryD4j.py `pwd`/resultsTestCases
-                          
+                             
           
       - uses: actions/upload-artifact@v2
         with:
           name: resultsD4J
           path: resultsTestCases/
-
-      - uses: actions/upload-artifact@v2
-        with:
-          name: summary.md
-          path: resultsTestCases/summary.md         
+    
 
       - name: Codecov
         uses: codecov/codecov-action@v1.5.2
