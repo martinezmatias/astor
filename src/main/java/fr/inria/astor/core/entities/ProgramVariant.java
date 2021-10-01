@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import fr.inria.astor.core.entities.validation.VariantValidationResult;
 import fr.inria.astor.core.manipulation.bytecode.entities.CompilationResult;
@@ -213,14 +211,21 @@ public class ProgramVariant {
 	 */
 	public List<CtType<?>> getAffectedClasses() {
 
-		Set<CtType<?>> affectedClassesSet = new HashSet<CtType<?>>();
-		for (OperatorInstance anOperation : this.getAllOperations()) {
-			ModificationPoint aModifPoint = anOperation.getModificationPoint();
-			affectedClassesSet.add(aModifPoint.getCtClass());
-		}
+//		Set<CtType<?>> affectedClassesSet = new HashSet<CtType<?>>();
+//		for (OperatorInstance anOperation : this.getAllOperations()) {
+//			ModificationPoint aModifPoint = anOperation.getModificationPoint();
+//			affectedClassesSet.add(aModifPoint.getCtClass());
+//		}
+//
+//		List<CtType<?>> affectedClasses = new ArrayList<CtType<?>>(affectedClassesSet);
+//		return Collections.unmodifiableList(affectedClasses);
 
-		List<CtType<?>> affectedClasses = new ArrayList<CtType<?>>(affectedClassesSet);
-		return Collections.unmodifiableList(affectedClasses);
+		List<CtType<?>> r = new ArrayList<CtType<?>>();
+		for (CtClass c : loadClasses.values()) {
+			r.add(c);
+		}
+		return Collections.unmodifiableList(r);
+
 	}
 
 	public boolean isSolution() {
