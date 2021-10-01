@@ -207,7 +207,12 @@ public class D4JWorkflowTestSingle {
 		cs.command.putIfAbsent("-flthreshold", "0");
 		// cs.command.put("-logtestexecution", "true");
 		cs.command.put("-parameters", "logtestexecution:true");
-
+//testDecreasingSteps(org.apache.commons.math.ode.nonstiff.ClassicalRungeKuttaIntegratorTest): null-, testDecreasingSteps(c): null-, testEvents(org.apache.commons.math.ode.nonstiff.HighamHall54IntegratorTest): null-, testDecreasingSteps(org.apache.commons.math.ode.nonstiff.ThreeEighthesIntegratorTest
+		cs.command.put("-ignoredtestcases",
+				"org.apache.commons.math.util.FastMathTest" + File.pathSeparator
+						+ "org.apache.commons.math.ode.nonstiff.ClassicalRungeKuttaIntegratorTest" + File.pathSeparator
+						+ "org.apache.commons.math.ode.nonstiff.GillIntegratorTest" + File.pathSeparator
+						+ "org.apache.commons.math.ode.nonstiff.ThreeEighthesIntegratorTest");
 		runComplete("Math40", "", "jKali", 30, cs);
 	}
 
@@ -508,6 +513,8 @@ public class D4JWorkflowTestSingle {
 		cs.command.putIfAbsent("-ignoredtestcases", "org.apache.commons.math.util.FastMathTest");
 
 		System.out.println("\nConfiguration " + cs.command.toString());
+
+		cs.append("-parameters", "logtestexecution:true");
 
 		// org.apache.commons.math.util.FastMathTest#checkMissingFastMathClasses
 		return cs;
