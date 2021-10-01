@@ -531,7 +531,7 @@ public class D4JWorkflowTestSingle {
 		}
 		System.out.println("\nConfiguration " + cs.command.toString());
 
-		cs.append("-parameters", "logtestexecution:true");
+		// cs.append("-parameters", "logtestexecution:true");
 
 		return cs;
 	}
