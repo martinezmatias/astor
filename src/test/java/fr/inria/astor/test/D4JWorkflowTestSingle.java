@@ -520,6 +520,11 @@ public class D4JWorkflowTestSingle {
 
 		if (cs.command.containsValue("-ignoredtestcases")) {
 
+			// Already passed some test to ignore
+			String tctoignore = cs.command.get("-ignoredtestcases");
+			cs.command.putIfAbsent("-ignoredtestcases",
+					"org.apache.commons.math.util.FastMathTest" + File.pathSeparator + tctoignore);
+			//
 		} else {
 
 			cs.command.putIfAbsent("-ignoredtestcases", "org.apache.commons.math.util.FastMathTest");
