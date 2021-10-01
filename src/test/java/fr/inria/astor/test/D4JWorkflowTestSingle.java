@@ -336,7 +336,7 @@ public class D4JWorkflowTestSingle {
 
 		configureBuggyProject(bug_id, mvn_option);
 
-		String[] faultLocalization = new String[] { "gzoltar" };// , "flacoco"
+		String[] faultLocalization = new String[] { "gzoltar", "flacoco" };//
 
 		boolean hasSolution = false;
 
@@ -531,7 +531,7 @@ public class D4JWorkflowTestSingle {
 		}
 		System.out.println("\nConfiguration " + cs.command.toString());
 
-		// cs.append("-parameters", "logtestexecution:true");
+		cs.append("-parameters", "logtestexecution:true");
 
 		return cs;
 	}
