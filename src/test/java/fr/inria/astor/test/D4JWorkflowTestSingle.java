@@ -336,7 +336,7 @@ public class D4JWorkflowTestSingle {
 
 		configureBuggyProject(bug_id, mvn_option);
 
-		String[] faultLocalization = new String[] { "gzoltar", "flacoco" };
+		String[] faultLocalization = new String[] { "gzoltar" };// , "flacoco"
 
 		boolean hasSolution = false;
 
