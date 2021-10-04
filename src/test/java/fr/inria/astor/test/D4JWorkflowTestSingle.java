@@ -377,7 +377,7 @@ public class D4JWorkflowTestSingle {
 			File foutput = new File("./output_astor/AstorMain-" + bug_id + File.separator + "astor_output.json");
 			// We rename the file and put in a result folder
 			File foutputnew = new File(dirResults.getAbsolutePath() + File.separator + File.separator + "astor_output_"
-					+ bug_id + "_" + aFL + ".json");
+					+ bug_id + "-" + approach + "_" + aFL + ".json");
 
 			Files.copy(foutput.toPath(), foutputnew.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
