@@ -390,7 +390,8 @@ public class D4JWorkflowTestSingle {
 		}
 		// Save results
 
-		String fileNameResults = dirResults.getAbsolutePath() + File.separator + "results_" + bug_id + ".json";
+		String fileNameResults = dirResults.getAbsolutePath() + File.separator + "results_" + bug_id + "-" + approach
+				+ ".json";
 		System.out.println("Saving results at " + fileNameResults);
 		FileWriter fw = new FileWriter(fileNameResults);
 		fw.write("{\"bugid\" :  \" " + bug_id + " \" , \"flacoco_sol\": \" " + repairedPerFL.get("flacoco")
