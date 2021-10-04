@@ -394,9 +394,10 @@ public class D4JWorkflowTestSingle {
 				+ ".json";
 		System.out.println("Saving results at " + fileNameResults);
 		FileWriter fw = new FileWriter(fileNameResults);
-		fw.write("{\"bugid\" :  \" " + bug_id + " \" , \"flacoco_sol\": \" " + repairedPerFL.get("flacoco")
-				+ " \" , \"flacoco_time\" : " + timePerFL.get("flacoco") + ", \"gzoltar_sol\": \" "
-				+ repairedPerFL.get("gzoltar") + " \" , \"gzoltar_time\": " + timePerFL.get("gzoltar")
+		fw.write("{\"bugid\" :  \" " + bug_id + "\",  \"approach\": \"  " + approach + " \" , \"flacoco_sol\": \" "
+				+ repairedPerFL.get("flacoco") + " \" , \"flacoco_time\" : " + timePerFL.get("flacoco")
+				+ ", \"gzoltar_sol\": \" " + repairedPerFL.get("gzoltar") + " \" , \"gzoltar_time\": "
+				+ timePerFL.get("gzoltar")
 
 				+ "}");
 		fw.close();
