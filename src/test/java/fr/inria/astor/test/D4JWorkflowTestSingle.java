@@ -121,7 +121,11 @@ public class D4JWorkflowTestSingle {
 
 	@Test
 	public void testMath84() throws Exception {
-		runCompleteJGenProg("Math84", "");
+
+		CommandSummary cs = new CommandSummary();
+		cs.command.putIfAbsent("-maxmemory", "-Xmx1G");
+
+		runComplete("Math84", "", "jGenProg", 30, cs);
 	}
 
 	@Test
@@ -506,10 +510,10 @@ public class D4JWorkflowTestSingle {
 		cs.command.putIfAbsent("-maxgen", "10000");
 		cs.command.putIfAbsent("-stopfirst", "true");
 		cs.command.putIfAbsent("-loglevel", "DEBUG");
-		// cs.command.put("-package", "org.apache.commons");
 		cs.command.putIfAbsent("-maxtime", new Integer(timeout).toString());
 
-		cs.command.putIfAbsent("-faultlocalization", faultLocalization);
+		// Override:
+		cs.command.put("-faultlocalization", faultLocalization);
 
 		cs.command.putIfAbsent("-javacompliancelevel", "7");
 

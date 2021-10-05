@@ -106,6 +106,14 @@ public class FlacocoFaultLocalization implements FaultLocalizationStrategy {
 
 		config.setTestRunnerTimeoutInMs(new Integer(ConfigurationProperties.getProperty("maxtime")) * 60000);
 
+		if (ConfigurationProperties.properties.contains("maxmemory")) {
+
+			config.setTestRunnerJVMArgs(ConfigurationProperties.properties.get("maxmemory").toString());
+
+		} else {
+			config.setTestRunnerJVMArgs(null);
+
+		}
 		config.setProjectPath(projectFacade.getProperties().getOriginalProjectRootDir());
 		config.setClasspath(projectFacade.getProperties().getDependenciesString());
 		config.setComplianceLevel(ConfigurationProperties.getPropertyInt("javacompliancelevel"));
@@ -118,7 +126,9 @@ public class FlacocoFaultLocalization implements FaultLocalizationStrategy {
 
 		// Handle manually set includes/excludes
 		if (ConfigurationProperties.getProperty("packageToInstrument") != null
-				&& !ConfigurationProperties.getProperty("packageToInstrument").isEmpty()) {
+				&& !ConfigurationProperties.getProperty("packageToInstrument").isEmpty())
+
+		{
 			String option = ConfigurationProperties.getProperty("packageToInstrument");
 			if (!option.endsWith(".*")) {
 				option += ".*";
