@@ -33,6 +33,8 @@ import fr.inria.main.evolution.AstorMain;
  */
 public class D4JWorkflowTestSingle {
 
+	private static final int TIMEOUTMIN = 60;
+
 	public String bugidParametrized;
 
 	@Test
@@ -125,7 +127,7 @@ public class D4JWorkflowTestSingle {
 		CommandSummary cs = new CommandSummary();
 		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx1G");
 
-		runComplete("Math84", "", "jGenProg", 30, cs);
+		runComplete("Math84", "", "jGenProg", 60, cs);
 	}
 
 	@Test
@@ -189,28 +191,28 @@ public class D4JWorkflowTestSingle {
 		CommandSummary cs = new CommandSummary();
 		cs.command.putIfAbsent("-flthreshold", "0.0");
 		cs.command.putIfAbsent("-javacompliancelevel", "5");
-		runComplete("Math2", "", "jKali", 30, cs);
+		runComplete("Math2", "", "jKali", TIMEOUTMIN, cs);
 	}
 
 	@Test
 	public void testMath8JKali() throws Exception {
 		CommandSummary cs = new CommandSummary();
 		cs.command.putIfAbsent("-flthreshold", "0");
-		runComplete("Math8", "", "jKali", 30, cs);
+		runComplete("Math8", "", "jKali", TIMEOUTMIN, cs);
 	}
 
 	@Test
 	public void testMath28JKali() throws Exception {
 		CommandSummary cs = new CommandSummary();
 		cs.command.putIfAbsent("-flthreshold", "0");
-		runComplete("Math28", "", "jKali", 30, cs);
+		runComplete("Math28", "", "jKali", TIMEOUTMIN, cs);
 	}
 
 	@Test
 	public void testMath32JKali() throws Exception {
 		CommandSummary cs = new CommandSummary();
 		cs.command.putIfAbsent("-flthreshold", "0");
-		runComplete("Math32", "", "jKali", 30, cs);
+		runComplete("Math32", "", "jKali", TIMEOUTMIN, cs);
 	}
 
 	@Test
@@ -224,96 +226,96 @@ public class D4JWorkflowTestSingle {
 						+ "org.apache.commons.math.ode.nonstiff.GillIntegratorTest" + File.pathSeparator
 						+ "org.apache.commons.math.ode.nonstiff.ThreeEighthesIntegratorTest" + File.pathSeparator
 						+ "org.apache.commons.math.ode.nonstiff.HighamHall54IntegratorTest");
-		runComplete("Math40", "", "jKali", 30, cs);
+		runComplete("Math40", "", "jKali", TIMEOUTMIN, cs);
 	}
 
 	@Test
 	public void testMath49JKali() throws Exception {
-		runComplete("Math49", "", "jKali", 30);
+		runComplete("Math49", "", "jKali", TIMEOUTMIN);
 	}
 
 	@Test
 	public void testMath50JKali() throws Exception {
-		runComplete("Math50", "", "jKali", 30);
+		runComplete("Math50", "", "jKali", TIMEOUTMIN);
 	}
 
 	@Test
 	public void testMath78JKali() throws Exception {
-		runComplete("Math50", "", "jKali", 30);
+		runComplete("Math50", "", "jKali", TIMEOUTMIN);
 	}
 
 	@Test
 	public void testMath80JKali() throws Exception {
-		runComplete("Math80", "", "jKali", 30);
+		runComplete("Math80", "", "jKali", TIMEOUTMIN);
 	}
 
 	@Test
 	public void testMath81JKali() throws Exception {
-		runComplete("Math81", "", "jKali", 30);
+		runComplete("Math81", "", "jKali", TIMEOUTMIN);
 	}
 
 	@Test
 	public void testMath82JKali() throws Exception {
-		runComplete("Math82", "", "jKali", 30);
+		runComplete("Math82", "", "jKali", TIMEOUTMIN);
 	}
 
 	@Test
 	public void testMath84JKali() throws Exception {
-		runComplete("Math84", "", "jKali", 30);
+		runComplete("Math84", "", "jKali", TIMEOUTMIN);
 	}
 
 	@Test
 	public void testMath85JKali() throws Exception {
-		runComplete("Math85", "", "jKali", 30);
+		runComplete("Math85", "", "jKali", TIMEOUTMIN);
 	}
 
 	@Test
 	public void testMath95JKali() throws Exception {
 		CommandSummary cs = new CommandSummary();
 		cs.command.putIfAbsent("-flthreshold", "0");
-		runComplete("Math95", "", "jKali", 30, cs);
+		runComplete("Math95", "", "jKali", TIMEOUTMIN, cs);
 	}
 
 	@Test
 	public void testTime11JKali() throws Exception {
 		CommandSummary cs = new CommandSummary();
 		cs.command.putIfAbsent("-flthreshold", "0");
-		runComplete("Time11", "", "jKali", 30, cs);
+		runComplete("Time11", "", "jKali", TIMEOUTMIN, cs);
 	}
 
 	@Test
 	public void testChart1JKali() throws Exception {
-		runComplete("Chart1", "", "jKali", 30);
+		runComplete("Chart1", "", "jKali", TIMEOUTMIN);
 	}
 
 	@Test
 	public void testChart5JKali() throws Exception {
-		runComplete("Chart5", "", "jKali", 30);
+		runComplete("Chart5", "", "jKali", TIMEOUTMIN);
 	}
 
 	@Test
 	public void testChart13JKali() throws Exception {
-		runComplete("Chart13", "", "jKali", 30);
+		runComplete("Chart13", "", "jKali", TIMEOUTMIN);
 	}
 
 	@Test
 	public void testChart15JKali() throws Exception {
-		runComplete("Chart15", "", "jKali", 30);
+		runComplete("Chart15", "", "jKali", TIMEOUTMIN);
 	}
 
 	@Test
 	public void testChart25JKali() throws Exception {
-		runComplete("Chart25", "", "jKali", 30);
+		runComplete("Chart25", "", "jKali", TIMEOUTMIN);
 	}
 
 	@Test
 	public void testChart26JKali() throws Exception {
-		runComplete("Chart26", "", "jKali", 30);
+		runComplete("Chart26", "", "jKali", TIMEOUTMIN);
 	}
 
 	public static void runCompleteJGenProg(String bug_id, String mvn_option) throws Exception {
 
-		runComplete(bug_id, mvn_option, "jGenProg", 30);
+		runComplete(bug_id, mvn_option, "jGenProg", TIMEOUTMIN);
 	}
 
 	public static void runCompleteJGenProg(String bug_id, String mvn_option, int timeout) throws Exception {
