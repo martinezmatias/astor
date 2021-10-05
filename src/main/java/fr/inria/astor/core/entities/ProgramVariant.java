@@ -224,7 +224,7 @@ public class ProgramVariant {
 	public List<CtType<?>> getClassesToCompile() {
 
 		Set<CtType<?>> affectedClassesSet = new HashSet<CtType<?>>();
-		System.out.println("--> ops: " + this.getAllOperations());
+
 		for (OperatorInstance anOperation : this.getAllOperations()) {
 			ModificationPoint aModifPoint = anOperation.getModificationPoint();
 			affectedClassesSet.add(aModifPoint.getCtClass());
@@ -232,7 +232,6 @@ public class ProgramVariant {
 
 		List<CtType<?>> affectedClasses = new ArrayList<CtType<?>>(affectedClassesSet);
 
-		System.out.println("--> affectedClasse: " + affectedClasses);
 		return Collections.unmodifiableList(affectedClasses);
 
 	}
