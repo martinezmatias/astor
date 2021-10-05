@@ -18,7 +18,13 @@ for file in os.listdir(resultDir):
 
 		with open(abpath) as f:
 			data = json.load(f)
-			resultS+= "|{}|{}|{}|{}|{}|\n".format(data["bugid"],data["flacoco_sol"],data["flacoco_time"],data["gzoltar_sol"],data["gzoltar_time"] )
+			
+			isRepairedFlacoco = data["flacoco_sol"]
+			timeFlacoco =   data["flacoco_time"] if isRepairedFlacoco.strip().lower() == 'true'  else "-"
+			isRepairedGzoltar = data["gzoltar_sol"]
+			timeGzoltar = data["gzoltar_time"] if isRepairedGzoltar.strip().lower() == 'true'  else "-"
+			
+			resultS+= "|{}_{}|{}|{}|{}|{}|\n".format(data["bugid"].strip(),data["approach"].strip(),isRepairedFlacoco,timeFlacoco,isRepairedGzoltar, timeGzoltar )
 
 
 outFileSummary = os.path.join(resultDir, "summary.md")
