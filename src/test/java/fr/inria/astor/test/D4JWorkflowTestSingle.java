@@ -498,27 +498,26 @@ public class D4JWorkflowTestSingle {
 
 		System.out.println(depStrings);
 
-		cs.command.putIfAbsent("-id", bug_id);
-		cs.command.putIfAbsent("-mode", approach);
-		cs.command.putIfAbsent("-srcjavafolder", src);
-		cs.command.putIfAbsent("-srctestfolder", srcTst);
-		cs.command.putIfAbsent("-binjavafolder", classBin);
-		cs.command.putIfAbsent("-bintestfolder", testBin);
+		cs.command.put("-id", bug_id);
+		cs.command.put("-mode", approach);
+		cs.command.put("-srcjavafolder", src);
+		cs.command.put("-srctestfolder", srcTst);
+		cs.command.put("-binjavafolder", classBin);
+		cs.command.put("-bintestfolder", testBin);
 
-		cs.command.putIfAbsent("-location", locationProject);
-		cs.command.putIfAbsent("-dependencies", depStrings);
+		cs.command.put("-location", locationProject);
+		cs.command.put("-dependencies", depStrings);
 		cs.command.putIfAbsent("-maxgen", "10000");
 		cs.command.putIfAbsent("-stopfirst", "true");
 		cs.command.putIfAbsent("-loglevel", "DEBUG");
 		cs.command.putIfAbsent("-maxtime", new Integer(timeout).toString());
 
-		// Override:
 		cs.command.put("-faultlocalization", faultLocalization);
 
 		cs.command.putIfAbsent("-javacompliancelevel", "7");
 
-		cs.command.putIfAbsent("-population", "1");
-		cs.command.putIfAbsent("-flthreshold", "0.1");
+		cs.command.put("-population", "1");
+		cs.command.put("-flthreshold", "0.1");
 		cs.command.putIfAbsent("-seed", "10");
 		cs.command.putIfAbsent("-tmax1", "30000");
 
