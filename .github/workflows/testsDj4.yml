@@ -13,7 +13,8 @@ jobs:
       fail-fast: false
       matrix:
         test: [ 
-          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath70"
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath70",
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath84"
              	  		
       ]
 
