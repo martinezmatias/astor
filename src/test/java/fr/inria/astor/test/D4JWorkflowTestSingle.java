@@ -123,7 +123,7 @@ public class D4JWorkflowTestSingle {
 	public void testMath84() throws Exception {
 
 		CommandSummary cs = new CommandSummary();
-		cs.command.putIfAbsent("-maxmemory", "-Xmx1G");
+		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx1G");
 
 		runComplete("Math84", "", "jGenProg", 30, cs);
 	}
