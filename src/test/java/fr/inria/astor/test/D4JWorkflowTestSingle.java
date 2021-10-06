@@ -67,7 +67,7 @@ public class D4JWorkflowTestSingle {
 	@Test
 	public void testMath40() throws Exception {
 		CommandSummary cs = new CommandSummary();
-		cs.command.putIfAbsent("-flthreshold", "0");
+		cs.command.putIfAbsent("-flthreshold", "0.2");
 		cs.command.put("-parameters", "logtestexecution:true");
 		cs.command.put("-ignoredtestcases",
 				"org.apache.commons.math.util.FastMathTest" + File.pathSeparator
