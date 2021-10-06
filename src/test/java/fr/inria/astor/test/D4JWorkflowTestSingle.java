@@ -519,7 +519,7 @@ public class D4JWorkflowTestSingle {
 		cs.command.putIfAbsent("-javacompliancelevel", "7");
 
 		cs.command.put("-population", "1");
-		cs.command.put("-flthreshold", "0.1");
+		cs.command.putIfAbsent("-flthreshold", "0.1");
 		cs.command.putIfAbsent("-seed", "10");
 		cs.command.putIfAbsent("-tmax1", "30000");
 
