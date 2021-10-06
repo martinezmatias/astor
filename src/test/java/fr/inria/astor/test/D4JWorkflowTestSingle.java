@@ -39,17 +39,24 @@ public class D4JWorkflowTestSingle {
 
 	@Test
 	public void testMath2() throws Exception {
-		runCompleteJGenProg("Math2", "-Dmaven.compiler.source=7 -Dmaven.compiler.target=7", 90);
+
+		CommandSummary cs = new CommandSummary();
+		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx1G");
+		runComplete("Math2", "-Dmaven.compiler.source=7 -Dmaven.compiler.target=7", "jGenProg", 90, cs);
 	}
 
 	@Test
 	public void testMath5() throws Exception {
-		runCompleteJGenProg("Math5", "", 90);
+		CommandSummary cs = new CommandSummary();
+		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx1G");
+		runComplete("Math5", "", "jGenProg", 90, cs);
 	}
 
 	@Test
 	public void testMath8() throws Exception {
-		runCompleteJGenProg("Math8", "-Dmaven.compiler.source=7 -Dmaven.compiler.target=7", 90);
+		CommandSummary cs = new CommandSummary();
+		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx1G");
+		runComplete("Math8", "-Dmaven.compiler.source=7 -Dmaven.compiler.target=7", "jGenProg", 90, cs);
 	}
 
 	@Test
@@ -127,7 +134,7 @@ public class D4JWorkflowTestSingle {
 		CommandSummary cs = new CommandSummary();
 		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx1G");
 
-		runComplete("Math84", "", "jGenProg", 60, cs);
+		runComplete("Math84", "", "jGenProg", 90, cs);
 	}
 
 	@Test
@@ -191,6 +198,8 @@ public class D4JWorkflowTestSingle {
 		CommandSummary cs = new CommandSummary();
 		cs.command.putIfAbsent("-flthreshold", "0.0");
 		cs.command.putIfAbsent("-javacompliancelevel", "5");
+		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx1G");
+
 		runComplete("Math2", "", "jKali", TIMEOUTMIN, cs);
 	}
 
