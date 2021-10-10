@@ -17,9 +17,11 @@ import spoon.reflect.reference.CtExecutableReference;
  */
 public class InsertBeforeOp extends InsertStatementOp {
 
+	boolean successful = false;
+
 	@Override
 	public boolean applyChangesInModel(OperatorInstance operation, ProgramVariant p) {
-		boolean successful = false;
+
 		CtStatement ctst = (CtStatement) operation.getOriginal();
 		CtStatement fix = (CtStatement) operation.getModified();
 		StatementOperatorInstance stmtoperator = (StatementOperatorInstance) operation;
@@ -29,7 +31,7 @@ public class InsertBeforeOp extends InsertStatementOp {
 
 			if (ctst instanceof CtInvocation && ((CtInvocation<?>) ctst).getExecutable().getSimpleName()
 					.startsWith(CtExecutableReference.CONSTRUCTOR_NAME)) {
-				log.error("Cannot insert before an Super or this: " + ctst);
+				log.error("Error at InsertBeforeOp appplying: Cannot insert before an Super or this: " + ctst);
 				return false;
 			}
 
@@ -47,14 +49,25 @@ public class InsertBeforeOp extends InsertStatementOp {
 
 	@Override
 	public boolean undoChangesInModel(OperatorInstance operation, ProgramVariant p) {
-		StatementOperatorInstance stmtoperator = (StatementOperatorInstance) operation;
-		CtStatement ctst = (CtStatement) operation.getOriginal();
-		CtStatement fix = (CtStatement) operation.getModified();
-		CtBlock<?> parentBlock = stmtoperator.getParentBlock();
-		int position = stmtoperator.getLocationInParent();
-		boolean sucess = StatementSupporter.remove(parentBlock, fix, position);
-		parentBlock.setImplicit(stmtoperator.isParentBlockImplicit());
-		return sucess;
+		if (this.successful) {
+			StatementOperatorInstance stmtoperator = (StatementOperatorInstance) operation;
+			CtStatement ctst = (CtStatement) operation.getOriginal();
+			CtStatement fix = (CtStatement) operation.getModified();
+			CtBlock<?> parentBlock = stmtoperator.getParentBlock();
+
+			if (ctst instanceof CtInvocation && ((CtInvocation<?>) ctst).getExecutable().getSimpleName()
+					.startsWith(CtExecutableReference.CONSTRUCTOR_NAME)) {
+				log.error("Error at InsertBeforeOp undoing: Cannot insert before an Super or this: " + ctst);
+				return false;
+			}
+
+			int position = stmtoperator.getLocationInParent();
+			boolean sucess = StatementSupporter.remove(parentBlock, fix, position);
+			parentBlock.setImplicit(stmtoperator.isParentBlockImplicit());
+			return sucess;
+		} else {
+			return false;
+		}
 
 	}
 

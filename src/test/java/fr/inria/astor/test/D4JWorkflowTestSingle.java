@@ -352,7 +352,7 @@ public class D4JWorkflowTestSingle {
 
 		String[] faultLocalization = new String[] { "gzoltar", "flacoco" };//
 
-		boolean hasSolution = false;
+		boolean hasSolution = true;
 
 		Map<String, Long> timePerFL = new HashMap<>();
 		Map<String, Boolean> repairedPerFL = new HashMap<>();
@@ -382,7 +382,7 @@ public class D4JWorkflowTestSingle {
 
 			System.out.println("Finishing execution for " + bug_id + ": # patches: " + variantsSolutions.size());
 
-			hasSolution = hasSolution || variantsSolutions.size() > 0;
+			hasSolution = hasSolution && variantsSolutions.size() > 0;
 
 			// Results
 
