@@ -114,6 +114,7 @@ public class FlacocoFaultLocalization implements FaultLocalizationStrategy {
 			config.setTestRunnerJVMArgs(null);
 
 		}
+
 		config.setProjectPath(projectFacade.getProperties().getOriginalProjectRootDir());
 		config.setClasspath(projectFacade.getProperties().getDependenciesString());
 		config.setComplianceLevel(ConfigurationProperties.getPropertyInt("javacompliancelevel"));
@@ -156,6 +157,7 @@ public class FlacocoFaultLocalization implements FaultLocalizationStrategy {
 				}
 			}
 		}
+		System.out.print("[For test]max mem flacoco TestRunnerJVMArgs: " + config.getTestRunnerJVMArgs());
 
 		return config;
 	}
