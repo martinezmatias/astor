@@ -113,7 +113,12 @@ public class D4JWorkflowTestSingle {
 
 	@Test
 	public void testMath78() throws Exception {
-		runCompleteJGenProg("Math78", "");
+
+		CommandSummary cs = new CommandSummary();
+		cs.command.put("-ignoredtestcases", "org.apache.commons.math.util.FastMathTest" + File.pathSeparator
+				+ "org.apache.commons.math.random.RandomAdaptorTest");
+		runComplete("Math78", "", "jGenProg", 90, cs);
+
 	}
 
 	@Test
@@ -254,7 +259,10 @@ public class D4JWorkflowTestSingle {
 
 	@Test
 	public void testMath78JKali() throws Exception {
-		runComplete("Math50", "", "jKali", TIMEOUTMIN);
+		CommandSummary cs = new CommandSummary();
+		cs.command.put("-ignoredtestcases", "org.apache.commons.math.util.FastMathTest" + File.pathSeparator
+				+ "org.apache.commons.math.random.RandomAdaptorTest");
+		runComplete("Math78", "", "jKali", 90, cs);
 	}
 
 	@Test
