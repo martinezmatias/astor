@@ -41,21 +41,21 @@ public class D4JWorkflowTestSingle {
 	public void testMath2() throws Exception {
 
 		CommandSummary cs = new CommandSummary();
-		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx1G");
+		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx8G");
 		runComplete("Math2", "-Dmaven.compiler.source=7 -Dmaven.compiler.target=7", "jGenProg", 90, cs);
 	}
 
 	@Test
 	public void testMath5() throws Exception {
 		CommandSummary cs = new CommandSummary();
-		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx1G");
+		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx8G");
 		runComplete("Math5", "", "jGenProg", 90, cs);
 	}
 
 	@Test
 	public void testMath8() throws Exception {
 		CommandSummary cs = new CommandSummary();
-		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx1G");
+		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx8G");
 		runComplete("Math8", "-Dmaven.compiler.source=7 -Dmaven.compiler.target=7", "jGenProg", 90, cs);
 	}
 
@@ -132,7 +132,7 @@ public class D4JWorkflowTestSingle {
 	public void testMath84() throws Exception {
 
 		CommandSummary cs = new CommandSummary();
-		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx1G");
+		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx8G");
 
 		runComplete("Math84", "", "jGenProg", 90, cs);
 	}
@@ -198,7 +198,7 @@ public class D4JWorkflowTestSingle {
 		CommandSummary cs = new CommandSummary();
 		cs.command.putIfAbsent("-flthreshold", "0.0");
 		cs.command.putIfAbsent("-javacompliancelevel", "5");
-		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx1G");
+		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx8G");
 
 		runComplete("Math2", "", "jKali", TIMEOUTMIN, cs);
 	}
