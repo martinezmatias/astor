@@ -61,7 +61,10 @@ public class D4JWorkflowTestSingle {
 
 	@Test
 	public void testMath28() throws Exception {
-		runCompleteJGenProg("Math28", "-Dmaven.compiler.source=7 -Dmaven.compiler.target=7", 90);
+		CommandSummary cs = new CommandSummary();
+		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx8G");
+		runComplete("Math28", "-Dmaven.compiler.source=7 -Dmaven.compiler.target=7", "jGenProg", 90, cs);
+
 	}
 
 	@Test
@@ -214,6 +217,7 @@ public class D4JWorkflowTestSingle {
 	public void testMath28JKali() throws Exception {
 		CommandSummary cs = new CommandSummary();
 		cs.command.putIfAbsent("-flthreshold", "0");
+		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx8G");
 		runComplete("Math28", "", "jKali", TIMEOUTMIN, cs);
 	}
 
