@@ -106,7 +106,7 @@ public class FlacocoFaultLocalization implements FaultLocalizationStrategy {
 
 		config.setTestRunnerTimeoutInMs(new Integer(ConfigurationProperties.getProperty("maxtime")) * 60000);
 
-		if (ConfigurationProperties.properties.contains("maxmemory")) {
+		if (ConfigurationProperties.properties.containsKey("maxmemory")) {
 			System.out.println("[TEST] maxmemory " + ConfigurationProperties.properties.get("maxmemory").toString());
 			config.setTestRunnerJVMArgs(ConfigurationProperties.properties.get("maxmemory").toString());
 
