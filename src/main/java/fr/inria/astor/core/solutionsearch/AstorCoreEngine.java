@@ -1221,7 +1221,6 @@ public abstract class AstorCoreEngine implements AstorExtensionPoint {
 
 			int lastGeneration = -1;
 			for (int i = 1; i <= generation; i++) {
-				log.info("Generation " + i);
 				List<OperatorInstance> genOperationInstances = solutionVariant.getOperations().get(i);
 				if (genOperationInstances == null)
 					continue;

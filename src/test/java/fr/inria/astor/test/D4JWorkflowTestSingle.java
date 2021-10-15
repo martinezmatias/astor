@@ -1,6 +1,6 @@
 package fr.inria.astor.test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Level;
 import org.junit.Test;
 
 import fr.inria.astor.core.entities.ProgramVariant;
@@ -386,7 +387,7 @@ public class D4JWorkflowTestSingle {
 
 			long init = System.currentTimeMillis();
 			try {
-				// org.apache.log4j.LogManager.getRootLogger().setLevel(Level.DEBUG);
+				org.apache.log4j.LogManager.getRootLogger().setLevel(Level.DEBUG);
 				main1.execute(cs.flat());
 			} catch (Exception e) {
 				e.printStackTrace();
