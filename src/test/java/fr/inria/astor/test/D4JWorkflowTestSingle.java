@@ -103,7 +103,11 @@ public class D4JWorkflowTestSingle {
 
 	@Test
 	public void testMath71() throws Exception {
-		runCompleteJGenProg("Math71", "", 90);
+
+		CommandSummary cs = new CommandSummary();
+		cs.command.putIfAbsent("-flthreshold", "0");
+
+		runComplete("Math71", "", "jGenProg", 90, cs);
 	}
 
 	@Test
