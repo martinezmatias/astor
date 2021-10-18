@@ -15,7 +15,8 @@ jobs:
         test: [ 
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath71",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath84",
-           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath95JKali",      	  		
+           "fr.inria.astor.test.D4JWorkflowTestSingle#testMath95JKali",     
+            "fr.inria.astor.test.D4JWorkflowTestSingle#testMath78JKali",  	  		
       ]
 
     steps:
