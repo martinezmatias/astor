@@ -80,7 +80,7 @@ public class LaucherJUnitProcess {
 			command.add(laucherClassName().getCanonicalName());
 			command.addAll(cls);
 
-			printCommandToExecute(command, waitTime);
+			// printCommandToExecute(command, waitTime);
 
 			ProcessBuilder pb = new ProcessBuilder("/bin/bash");
 
@@ -104,7 +104,6 @@ public class LaucherJUnitProcess {
 				p_stdin.write("export TZ");
 				p_stdin.newLine();
 				p_stdin.flush();
-				p_stdin.write("echo $TZ");
 				p_stdin.newLine();
 				p_stdin.flush();
 				// Writing the command
