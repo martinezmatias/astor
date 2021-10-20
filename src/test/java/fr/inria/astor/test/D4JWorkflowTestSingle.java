@@ -267,6 +267,7 @@ public class D4JWorkflowTestSingle {
 		CommandSummary cs = new CommandSummary();
 		cs.command.put("-ignoredtestcases", "org.apache.commons.math.util.FastMathTest" + File.pathSeparator
 				+ "org.apache.commons.math.random.RandomAdaptorTest");
+		cs.command.putIfAbsent("-flthreshold", "0");
 		runComplete("Math78", "", "jKali", 90, cs);
 	}
 
