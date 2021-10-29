@@ -1,6 +1,8 @@
 package fr.inria.astor.test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,9 +23,16 @@ import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Level;
 import org.junit.Test;
 
+import fr.inria.astor.approaches.jgenprog.operators.ReplaceOp;
+import fr.inria.astor.core.entities.OperatorInstance;
 import fr.inria.astor.core.entities.ProgramVariant;
+import fr.inria.astor.core.entities.StatementOperatorInstance;
+import fr.inria.astor.core.manipulation.MutationSupporter;
+import fr.inria.astor.core.setup.ConfigurationProperties;
+import fr.inria.astor.core.solutionsearch.AstorCoreEngine;
 import fr.inria.main.CommandSummary;
 import fr.inria.main.evolution.AstorMain;
+import spoon.reflect.code.CtCodeElement;
 
 /**
  * Execution of results from
@@ -146,6 +155,7 @@ public class D4JWorkflowTestSingle {
 
 		CommandSummary cs = new CommandSummary();
 		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx4G");
+		cs.command.put("-flthreshold", "0.7");
 
 		runComplete("Math84", "", "jGenProg", 90, cs);
 	}
@@ -463,12 +473,14 @@ public class D4JWorkflowTestSingle {
 
 		} else if (!new File(bug_id).exists()) {
 
+			String mvnpath = new File("/usr/local/bin/mvn").exists() ? "/usr/local/bin/mvn" : "mvn";
+
 			System.out.println("\nChecking out project: " + bug_id);
 			// for the rest we use Maven
-			String command = "mkdir -p tempdj4/" + bug_id + ";\n cd tempdj4/" + bug_id
+			String command = "java -version;mkdir -p tempdj4/" + bug_id + ";\n cd tempdj4/" + bug_id
 					+ ";\n git init;\n git fetch https://github.com/Spirals-Team/defects4j-repair " + bug_id + ":"
-					+ bug_id + ";\n git checkout " + bug_id + ";\n mvn -q test -DskipTests " + mvn_option
-					+ ";\n mvn -q dependency:build-classpath -Dmdep.outputFile=cp.txt";
+					+ bug_id + ";\n git checkout " + bug_id + ";\n " + mvnpath + " -q test -DskipTests " + mvn_option
+					+ ";\n " + mvnpath + " -q dependency:build-classpath -Dmdep.outputFile=cp.txt";
 			System.out.println(command);
 			Process p = Runtime.getRuntime().exec(new String[] { "sh", "-c", command });
 			p.waitFor();
@@ -479,7 +491,7 @@ public class D4JWorkflowTestSingle {
 		}
 	}
 
-	public static CommandSummary createCommand(String bug_id, String approach, int timeout, String faultLocalization,
+	public static void createCommand(String bug_id, String approach, int timeout, String faultLocalization,
 			CommandSummary cs) throws IOException, FileNotFoundException {
 		Properties prop = new Properties();
 		String locationProject = "./tempdj4/" + bug_id;
@@ -563,9 +575,8 @@ public class D4JWorkflowTestSingle {
 		}
 		System.out.println("\nConfiguration " + cs.command.toString());
 
-		cs.append("-parameters", "logtestexecution:true");
+		cs.append("-parameters", "logtestexecution:true:" + "maxmemory" + File.pathSeparator + "-Xmx4G");
 
-		return cs;
 	}
 
 	public void run(String bug_id, String mvn_option) throws Exception {
@@ -585,6 +596,105 @@ public class D4JWorkflowTestSingle {
 		System.err.println(errorOutput);
 
 		System.out.println("End case");
+
+	}
+
+	@Test
+	public void testFaultLocalizationFlacocoIssueMath2() throws IOException, InterruptedException {
+		org.apache.log4j.LogManager.getRootLogger().setLevel(Level.DEBUG);
+		configureBuggyProject("Math2", "-Dmaven.compiler.source=7 -Dmaven.compiler.target=7");
+		CommandSummary cs = new CommandSummary();
+		createCommand("Math2", "jGenprog", 5, "fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization",
+				cs);
+
+		AstorMain main1 = new AstorMain();
+
+		long init = System.currentTimeMillis();
+		try {
+
+			main1.execute(cs.flat());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@Test
+	public void testSynthesisjKaliIssueMath78PatchNopol() throws Exception {
+		org.apache.log4j.LogManager.getRootLogger().setLevel(Level.DEBUG);
+		String bugid = "Math78";
+
+		configureBuggyProject(bugid, "-Dmaven.compiler.source=7 -Dmaven.compiler.target=7");
+		CommandSummary cs = new CommandSummary();
+		createCommand(bugid, "jKali", 5, "gzoltar", cs); //
+
+		cs.command.put("-maxtime", "0");
+
+		assertEquals("0", cs.command.get("-maxtime"));
+
+		AstorMain main1 = new AstorMain();
+
+		long init = System.currentTimeMillis();
+
+		System.out.println("command before " + cs.flat());
+		main1.execute(cs.flat());
+
+		ConfigurationProperties.setProperty("maxtime", "1000000");
+		AstorCoreEngine engine = main1.getEngine();
+
+		assertEquals(1, engine.getVariants().size());
+		ProgramVariant programVariant = engine.getVariants().get(0);
+		programVariant.getModificationPoints()
+				.removeIf(e -> !(e.getCodeElement().toString().equals("delta = 0.5 * dx")));
+
+		assertEquals(1, programVariant.getModificationPoints().size());
+		System.out.println("---Starting second run---");
+		// let's start the evolution again (the model was already created on that
+		// engine, so we directly call start)
+		engine.startEvolution();
+
+		// we should call end after the startevol
+		engine.atEnd();
+
+		CtCodeElement newIf = MutationSupporter.getFactory().Code()
+				.createCodeSnippetStatement("if(y0 < 1){delta = 0.5 * dx;} ").partiallyEvaluate();
+
+		System.out.println("-->> " + newIf.toString());
+
+//		String codeNewS = newIf.toString();
+//
+//		assertTrue(codeNewS.contains("y0 < 1"));
+//
+//		assertTrue(codeNewS.contains("delta = 0.5 * dx"));
+
+		programVariant.getModificationPoints().get(0).setCodeElement(newIf);
+
+		System.out.println("code patch " + programVariant.getModificationPoints().get(0).getCodeElement());
+
+		ReplaceOp rop = new ReplaceOp();
+
+		OperatorInstance opinstance = new StatementOperatorInstance(programVariant.getModificationPoints().get(0), rop,
+				programVariant.getModificationPoints().get(0).getCodeElement(), newIf);
+
+		boolean applied = opinstance.applyModification();
+
+		assertTrue(applied);
+
+		programVariant.putModificationInstance(0, opinstance);
+
+		programVariant.setId(10);
+
+		ConfigurationProperties.setProperty("saveall", "true");
+
+		boolean passes = engine.processCreatedVariant(programVariant, 1);
+
+		assertNotNull(programVariant.getValidationResult());
+
+		assertTrue(passes);
+
+		boolean undo = opinstance.undoModification();
+
+		assertTrue(undo);
 
 	}
 

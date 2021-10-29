@@ -53,6 +53,10 @@ public class SpoonClassCompiler implements VariantCompiler {
 	public CompilationResult compile(ProgramVariant instance, URL[] cp) {
 		List<CtType<?>> ctClasses = instance.getClassesToCompile();
 
+		if (ctClasses.isEmpty()) {
+			throw new IllegalStateException("No class to compile");
+		}
+
 		CompilationResult compilation2 = this.compile(ctClasses, cp);
 
 		return compilation2;
