@@ -52,7 +52,8 @@ public class D4JWorkflowTestSingle {
 
 		CommandSummary cs = new CommandSummary();
 		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx4G");
-		runComplete("Math2", "-Dmaven.compiler.source=7 -Dmaven.compiler.target=7", "jGenProg", 90, cs);
+		cs.command.put("-flthreshold", "0.159");
+		runComplete("Math2", "-Dmaven.compiler.source=7 -Dmaven.compiler.target=7", "jGenProg", 120, cs);
 	}
 
 	@Test
@@ -157,7 +158,7 @@ public class D4JWorkflowTestSingle {
 		cs.append("-parameters", "maxmemory" + File.pathSeparator + "-Xmx4G");
 		cs.command.put("-flthreshold", "0.7");
 
-		runComplete("Math84", "", "jGenProg", 90, cs);
+		runComplete("Math84", "", "jGenProg", 120, cs);
 	}
 
 	@Test
