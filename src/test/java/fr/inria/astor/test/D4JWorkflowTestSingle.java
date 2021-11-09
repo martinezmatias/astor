@@ -338,6 +338,8 @@ public class D4JWorkflowTestSingle {
 
 	@Test
 	public void testChart15JKali() throws Exception {
+		CommandSummary cs = new CommandSummary();
+		cs.command.putIfAbsent("-flthreshold", "0.01");
 		runComplete("Chart15", "", "jKali", TIMEOUTMIN);
 	}
 
@@ -455,12 +457,21 @@ public class D4JWorkflowTestSingle {
 
 		// for Chart, we use ant
 
+		/// usr/local/bin/ant
+		String antpath = new File("/usr/local/bin/ant").exists() ? "/usr/local/bin/ant" : "ant";
+
+		// String javapath = new File("/usr/bin/java").exists() ? "/usr/bin/java" :
+		// "java";
+
 		if (bug_id.startsWith("Chart") && !new File(bug_id).exists()) {
 			// here we use maven to compile
-			String command = "mkdir -p tempdj4/" + bug_id + ";\n cd tempdj4/" + bug_id
+			String command = "java -version;mkdir -p tempdj4/" + bug_id + ";\n cd tempdj4/" + bug_id
 					+ ";\n git init;\n git fetch https://github.com/Spirals-Team/defects4j-repair " + bug_id + ":"
 					+ bug_id + ";\n git checkout " + bug_id + ";\n" + "sed -i -e '/delete dir/ d' ant/build.xml;\n"
-					+ "ant -f ant/build.xml compile compile-tests;\n"
+					+ antpath + " -f ant/build.xml compile compile-tests;\n"
+					// + "echo -n
+					// `pwd`/lib/iText-2.1.4.jar:`pwd`/lib/junit.jar:`pwd`/lib/servlet.jar >
+					// cp.txt;\n"
 					+ "echo -n `pwd`/lib/iText-2.1.4.jar:`pwd`/lib/junit.jar:`pwd`/lib/servlet.jar > cp.txt;\n"
 
 			;
