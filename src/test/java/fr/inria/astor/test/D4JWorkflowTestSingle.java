@@ -116,7 +116,8 @@ public class D4JWorkflowTestSingle {
 	public void testMath71() throws Exception {
 
 		CommandSummary cs = new CommandSummary();
-		cs.command.putIfAbsent("-flthreshold", "0");
+		cs.command.putIfAbsent("-flthreshold", "0.1");
+		cs.command.putIfAbsent("-scope", "local");
 
 		runComplete("Math71", "", "jGenProg", 90, cs);
 	}
