@@ -463,13 +463,15 @@ public class D4JWorkflowTestSingle {
 
 		// String javapath = new File("/usr/bin/java").exists() ? "/usr/bin/java" :
 		// "java";
-
+		String bugid_remotename = bug_id.toLowerCase().equals("chart15") ? "Chart15Refactor" : bug_id;
 		if (bug_id.startsWith("Chart") && !new File(bug_id).exists()) {
 			// here we use maven to compile
 			String command = "java -version;mkdir -p tempdj4/" + bug_id + ";\n cd tempdj4/" + bug_id
-					+ ";\n git init;\n git fetch https://github.com/Spirals-Team/defects4j-repair " + bug_id + ":"
-					+ bug_id + ";\n git checkout " + bug_id + ";\n" + "sed -i -e '/delete dir/ d' ant/build.xml;\n"
-					+ antpath + " -f ant/build.xml compile compile-tests;\n"
+					+ ";\n git init;\n git fetch "
+					// + "https://github.com/Spirals-Team/defects4j-repair "
+					+ "https://github.com/martinezmatias/defects4j-repair " + bugid_remotename + ":" + bug_id
+					+ ";\n git checkout " + bug_id + ";\n" + "sed -i -e '/delete dir/ d' ant/build.xml;\n" + antpath
+					+ " -f ant/build.xml compile compile-tests;\n"
 					// + "echo -n
 					// `pwd`/lib/iText-2.1.4.jar:`pwd`/lib/junit.jar:`pwd`/lib/servlet.jar >
 					// cp.txt;\n"
