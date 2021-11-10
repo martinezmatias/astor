@@ -23,6 +23,7 @@ import fr.inria.astor.approaches.extensions.minimpact.validator.ProcessEvoSuiteV
 import fr.inria.astor.approaches.jgenprog.jGenProgSpace;
 import fr.inria.astor.approaches.jkali.JKaliSpace;
 import fr.inria.astor.approaches.jmutrepair.jMutRepairSpace;
+import fr.inria.astor.core.entities.ModificationPoint;
 import fr.inria.astor.core.entities.OperatorInstance;
 import fr.inria.astor.core.entities.PatchDiff;
 import fr.inria.astor.core.entities.ProgramVariant;
@@ -211,6 +212,37 @@ public abstract class AstorCoreEngine implements AstorExtensionPoint {
 					log.error(e);
 				}
 			}
+		}
+
+		//
+		List<SuspiciousCode> susp = new ArrayList<>();
+		for (ModificationPoint mpi : originalVariant.getModificationPoints()) {
+			SuspiciousModificationPoint smpi = (SuspiciousModificationPoint) mpi;
+			if (!susp.contains(smpi.getSuspicious())) {
+				susp.add(smpi.getSuspicious());
+			}
+		}
+		String noout = (ConfigurationProperties.hasProperty("outfl") ? ConfigurationProperties.getProperty("outfl")
+				: output);
+		File f = (new File(noout));
+		if (!f.exists()) {
+			f.mkdirs();
+		}
+
+		try {
+			FileWriter fw = new FileWriter(
+					noout + File.separator + "suspicious_" + this.projectFacade.getProperties().getFixid() + ".json");
+			for (SuspiciousCode suspiciousCode : susp) {
+				fw.append(suspiciousCode.getClassName() + "," + suspiciousCode.getLineNumber() + ","
+						+ suspiciousCode.getSuspiciousValueString());
+				fw.append("\n");
+			}
+			fw.flush();
+			fw.close();
+
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 
 	}

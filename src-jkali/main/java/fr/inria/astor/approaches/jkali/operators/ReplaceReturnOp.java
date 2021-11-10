@@ -17,6 +17,7 @@ import fr.inria.astor.core.solutionsearch.spaces.operators.AutonomousOperator;
 import spoon.reflect.code.CtExpression;
 import spoon.reflect.code.CtIf;
 import spoon.reflect.code.CtReturn;
+import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.reference.CtTypeReference;
@@ -110,8 +111,9 @@ public class ReplaceReturnOp extends AutonomousOperator implements StatementLeve
 
 	@Override
 	public boolean canBeAppliedToPoint(ModificationPoint point) {
-		// TODO Auto-generated method stub
-		return false;
+
+		return point.getCodeElement() instanceof CtStatement && !(point.getCodeElement().toString().startsWith("super")
+				|| point.getCodeElement().toString().startsWith("<init>"));
 	}
 
 }
