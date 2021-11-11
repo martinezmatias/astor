@@ -214,22 +214,21 @@ public abstract class AstorCoreEngine implements AstorExtensionPoint {
 			}
 		}
 
-		//
-		List<SuspiciousCode> susp = new ArrayList<>();
-		for (ModificationPoint mpi : originalVariant.getModificationPoints()) {
-			SuspiciousModificationPoint smpi = (SuspiciousModificationPoint) mpi;
-			if (!susp.contains(smpi.getSuspicious())) {
-				susp.add(smpi.getSuspicious());
-			}
-		}
-		String noout = (ConfigurationProperties.hasProperty("outfl") ? ConfigurationProperties.getProperty("outfl")
-				: output);
-		File f = (new File(noout));
-		if (!f.exists()) {
-			f.mkdirs();
-		}
-
 		try {
+			List<SuspiciousCode> susp = new ArrayList<>();
+			for (ModificationPoint mpi : originalVariant.getModificationPoints()) {
+				SuspiciousModificationPoint smpi = (SuspiciousModificationPoint) mpi;
+				if (!susp.contains(smpi.getSuspicious())) {
+					susp.add(smpi.getSuspicious());
+				}
+			}
+			String noout = (ConfigurationProperties.hasProperty("outfl") ? ConfigurationProperties.getProperty("outfl")
+					: output);
+			File f = (new File(noout));
+			if (!f.exists()) {
+				f.mkdirs();
+			}
+
 			FileWriter fw = new FileWriter(
 					noout + File.separator + "suspicious_" + this.projectFacade.getProperties().getFixid() + ".json");
 			for (SuspiciousCode suspiciousCode : susp) {
@@ -240,8 +239,7 @@ public abstract class AstorCoreEngine implements AstorExtensionPoint {
 			fw.flush();
 			fw.close();
 
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
+		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 
