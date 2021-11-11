@@ -209,11 +209,15 @@ public class D4JWorkflowTestSingle {
 
 	@Test
 	public void testTime4() throws Exception {
+		CommandSummary cs = new CommandSummary();
+		cs.command.putIfAbsent("-javacompliancelevel", "5");
 		runCompleteJGenProg("Time4", "");
 	}
 
 	@Test
 	public void testTime11() throws Exception {
+		CommandSummary cs = new CommandSummary();
+		cs.command.putIfAbsent("-javacompliancelevel", "5");
 		runCompleteJGenProg("Time11", "");
 	}
 
@@ -318,7 +322,7 @@ public class D4JWorkflowTestSingle {
 	@Test
 	public void testTime11JKali() throws Exception {
 		CommandSummary cs = new CommandSummary();
-		cs.command.putIfAbsent("-flthreshold", "0");
+		cs.command.putIfAbsent("-javacompliancelevel", "5");
 		runComplete("Time11", "", "jKali", TIMEOUTMIN, cs);
 	}
 
