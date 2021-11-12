@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Level;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import fr.inria.astor.approaches.jgenprog.operators.ReplaceOp;
@@ -269,6 +270,43 @@ public class D4JWorkflowTestSingle {
 	}
 
 	@Test
+	public void testMath40JKaliSummary() throws Exception {
+		org.apache.log4j.LogManager.getRootLogger().setLevel(Level.DEBUG);
+		String bugid = "Math40";
+
+		configureBuggyProject(bugid, "-Dmaven.compiler.source=7 -Dmaven.compiler.target=7");
+		CommandSummary cs = new CommandSummary();
+		createCommand(bugid, "jKali", 5, "gzoltar", cs); //
+
+		cs.command.put("-maxtime", "0");
+		cs.command.put("-jvm4testexecution", (System.getenv("J7PATH") != null) ? System.getenv("J7PATH")
+				: "/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/bin/");
+		assertEquals("0", cs.command.get("-maxtime"));
+
+		AstorMain main1 = new AstorMain();
+
+		System.out.println("command before " + cs.flat());
+		main1.execute(cs.flat());
+
+		AstorCoreEngine engine = main1.getEngine();
+
+		assertEquals(1, engine.getVariants().size());
+		ProgramVariant programVariant = engine.getVariants().get(0);
+		programVariant.getModificationPoints().removeIf(e -> !(e.getCodeElement().getPosition().getFile().getName()
+				.contains("BracketingNthOrderBrentSolver.java") && e.getCodeElement().getPosition().getLine() == 260));
+
+		assertEquals(1, programVariant.getModificationPoints().size());
+		System.out.println("MD selected: " + programVariant.getModificationPoints().get(0).getCodeElement().toString());
+		ConfigurationProperties.setProperty("maxtime", "1000000");
+		engine.startEvolution();
+		engine.atEnd();
+
+		assertEquals(1, engine.getSolutions().size());
+		System.out.println("---Starting second run---");
+
+	}
+
+	@Test
 	public void testMath49JKali() throws Exception {
 		runComplete("Math49", "", "jKali", TIMEOUTMIN);
 	}
@@ -279,6 +317,7 @@ public class D4JWorkflowTestSingle {
 	}
 
 	@Test
+	@Ignore
 	public void testMath78JKali() throws Exception {
 		CommandSummary cs = new CommandSummary();
 		cs.command.put("-ignoredtestcases", "org.apache.commons.math.util.FastMathTest" + File.pathSeparator
@@ -406,7 +445,7 @@ public class D4JWorkflowTestSingle {
 
 			long init = System.currentTimeMillis();
 			try {
-				org.apache.log4j.LogManager.getRootLogger().setLevel(Level.DEBUG);
+				// org.apache.log4j.LogManager.getRootLogger().setLevel(Level.DEBUG);
 				main1.execute(cs.flat());
 			} catch (Exception e) {
 				e.printStackTrace();
