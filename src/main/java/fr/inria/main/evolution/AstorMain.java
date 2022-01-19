@@ -1,7 +1,5 @@
 package fr.inria.main.evolution;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +13,6 @@ import fr.inria.astor.approaches.jgenprog.JGenProg;
 import fr.inria.astor.approaches.jkali.JKaliEngine;
 import fr.inria.astor.approaches.jmutrepair.jMutRepairExhaustive;
 import fr.inria.astor.approaches.scaffold.ScaffoldRepairEngine;
-import fr.inria.astor.core.entities.ProgramVariant;
 import fr.inria.astor.core.faultlocalization.entity.SuspiciousCode;
 import fr.inria.astor.core.ingredientbased.ExhaustiveIngredientBasedEngine;
 import fr.inria.astor.core.manipulation.MutationSupporter;
@@ -36,25 +33,6 @@ public class AstorMain extends AbstractMain {
 	protected Logger log = Logger.getLogger(AstorMain.class.getName());
 
 	protected AstorCoreEngine core = null;
-
-	public void initProject(String location, String projectName, String dependencies, String packageToInstrument,
-			double thfl, String failing) throws Exception {
-
-		List<String> failingList = (failing != null) ? Arrays.asList(failing.split(File.pathSeparator))
-				: new ArrayList<>();
-		String method = this.getClass().getSimpleName();
-
-		projectFacade = getProjectConfiguration(location, projectName, method, failingList, dependencies, true);
-
-		projectFacade.getProperties().setExperimentName(this.getClass().getSimpleName());
-
-		projectFacade.setupWorkingDirectories(ProgramVariant.DEFAULT_ORIGINAL_VARIANT);
-
-		if (ConfigurationProperties.getPropertyBool("autocompile")) {
-			compileProject(projectFacade.getProperties());
-		}
-
-	}
 
 	/**
 	 * It creates a repair engine according to an execution mode.
@@ -201,42 +179,8 @@ public class AstorMain extends AbstractMain {
 		m.execute(args);
 	}
 
-	public void execute(String[] args) throws Exception {
-		boolean correct = processArguments(args);
-
-		log.info("Running Astor on a JDK at " + System.getProperty("java.home"));
-
-		if (!correct) {
-			System.err.println("Problems with commands arguments");
-			return;
-		}
-		if (isExample(args)) {
-			executeExample(args);
-			return;
-		}
-
-		String dependencies = ConfigurationProperties.getProperty("dependenciespath");
-		dependencies += (ConfigurationProperties.hasProperty("extendeddependencies"))
-				? (File.pathSeparator + ConfigurationProperties.hasProperty("extendeddependencies"))
-				: "";
-		String failing = ConfigurationProperties.getProperty("failing");
-		String location = ConfigurationProperties.getProperty("location");
-		String packageToInstrument = ConfigurationProperties.getProperty("packageToInstrument");
-		double thfl = ConfigurationProperties.getPropertyDouble("flthreshold");
-		String projectName = ConfigurationProperties.getProperty("projectIdentifier");
-
-		setupLogging();
-
-		run(location, projectName, dependencies, packageToInstrument, thfl, failing);
-
-	}
-
 	public AstorCoreEngine getEngine() {
 		return core;
-	}
-
-	public void setupLogging() throws IOException {
-		// done with log4j2.xml
 	}
 
 }

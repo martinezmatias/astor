@@ -1,9 +1,31 @@
 package fr.inria.main;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.cli.BasicParser;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.UnrecognizedOptionException;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
 import fr.inria.astor.core.entities.ProgramVariant;
 import fr.inria.astor.core.output.ReportResults;
 import fr.inria.astor.core.setup.ConfigurationProperties;
@@ -24,19 +46,9 @@ import fr.inria.astor.core.solutionsearch.spaces.operators.OperatorSpace;
 import fr.inria.astor.core.validation.ProgramVariantValidator;
 import fr.inria.astor.util.TimeUtil;
 import fr.inria.main.evolution.ExtensionPoints;
-import org.apache.commons.cli.*;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import spoon.Launcher;
 import spoon.OutputType;
 import spoon.SpoonModelBuilder.InputType;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.util.*;
 
 /**
  * Abstract entry point of the framework. It defines and manages program
@@ -282,7 +294,8 @@ public abstract class AbstractMain {
 
 		options.addOption("runjava7code", false, "Validates on Java 7");
 
-		options.addOption("antipattern", true, "(Optional) Indicates whether to apply anti-patterns when running jGenProg2 (default: false)");
+		options.addOption("antipattern", true,
+				"(Optional) Indicates whether to apply anti-patterns when running jGenProg2 (default: false)");
 
 	}
 
@@ -628,8 +641,7 @@ public abstract class AbstractMain {
 					cmd.getOptionValue("maxVarCombination"));
 
 		if (cmd.hasOption("antipattern"))
-			ConfigurationProperties.properties.setProperty("antipattern",
-			                                               cmd.getOptionValue("antipattern"));
+			ConfigurationProperties.properties.setProperty("antipattern", cmd.getOptionValue("antipattern"));
 
 		if (cmd.hasOption("parameters")) {
 			String[] pars = cmd.getOptionValue("parameters").split(File.pathSeparator);
@@ -869,8 +881,10 @@ public abstract class AbstractMain {
 		launcher.getModelBuilder().generateProcessedSourceFiles(OutputType.COMPILATION_UNITS);
 		launcher.getModelBuilder().compile(InputType.FILES);
 
-		projectFacade.getProperties().setOriginalAppBinDir(Collections.singletonList(launcher.getModelBuilder().getBinaryOutputDirectory().getAbsolutePath()));
-		projectFacade.getProperties().setOriginalTestBinDir(Collections.singletonList(launcher.getModelBuilder().getBinaryOutputDirectory().getAbsolutePath()));
+		projectFacade.getProperties().setOriginalAppBinDir(
+				Collections.singletonList(launcher.getModelBuilder().getBinaryOutputDirectory().getAbsolutePath()));
+		projectFacade.getProperties().setOriginalTestBinDir(
+				Collections.singletonList(launcher.getModelBuilder().getBinaryOutputDirectory().getAbsolutePath()));
 		// launcher.getModelBuilder().generateProcessedSourceFiles(OutputType.CLASSES);
 
 	}
@@ -1023,6 +1037,59 @@ public abstract class AbstractMain {
 			if (onlyOne && added)
 				break;
 		}
+	}
+
+	public void initProject(String location, String projectName, String dependencies, String packageToInstrument,
+			double thfl, String failing) throws Exception {
+
+		List<String> failingList = (failing != null) ? Arrays.asList(failing.split(File.pathSeparator))
+				: new ArrayList<>();
+		String method = this.getClass().getSimpleName();
+
+		projectFacade = getProjectConfiguration(location, projectName, method, failingList, dependencies, true);
+
+		projectFacade.getProperties().setExperimentName(this.getClass().getSimpleName());
+
+		projectFacade.setupWorkingDirectories(ProgramVariant.DEFAULT_ORIGINAL_VARIANT);
+
+		if (ConfigurationProperties.getPropertyBool("autocompile")) {
+			compileProject(projectFacade.getProperties());
+		}
+
+	}
+
+	public void setupLogging() throws IOException {
+		// done with log4j2.xml
+	}
+
+	public void execute(String[] args) throws Exception {
+		boolean correct = processArguments(args);
+
+		log.info("Running Astor on a JDK at " + System.getProperty("java.home"));
+
+		if (!correct) {
+			System.err.println("Problems with commands arguments");
+			return;
+		}
+		if (isExample(args)) {
+			executeExample(args);
+			return;
+		}
+
+		String dependencies = ConfigurationProperties.getProperty("dependenciespath");
+		dependencies += (ConfigurationProperties.hasProperty("extendeddependencies"))
+				? (File.pathSeparator + ConfigurationProperties.hasProperty("extendeddependencies"))
+				: "";
+		String failing = ConfigurationProperties.getProperty("failing");
+		String location = ConfigurationProperties.getProperty("location");
+		String packageToInstrument = ConfigurationProperties.getProperty("packageToInstrument");
+		double thfl = ConfigurationProperties.getPropertyDouble("flthreshold");
+		String projectName = ConfigurationProperties.getProperty("projectIdentifier");
+
+		setupLogging();
+
+		run(location, projectName, dependencies, packageToInstrument, thfl, failing);
+
 	}
 
 }

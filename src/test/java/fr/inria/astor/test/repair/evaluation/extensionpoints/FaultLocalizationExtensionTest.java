@@ -1,5 +1,22 @@
 package fr.inria.astor.test.repair.evaluation.extensionpoints;
 
+import static fr.inria.astor.test.repair.QuixBugsRepairTest.getQuixBugsCommand;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.tools.JavaCompiler;
+import javax.tools.ToolProvider;
+
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
+
 import fr.inria.astor.core.entities.ModificationPoint;
 import fr.inria.astor.core.entities.ProgramVariant;
 import fr.inria.astor.core.entities.SuspiciousModificationPoint;
@@ -12,37 +29,23 @@ import fr.inria.astor.test.repair.evaluation.regression.MathCommandsTests;
 import fr.inria.main.CommandSummary;
 import fr.inria.main.ExecutionMode;
 import fr.inria.main.evolution.AstorMain;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
-
-import javax.tools.JavaCompiler;
-import javax.tools.ToolProvider;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import static fr.inria.astor.test.repair.QuixBugsRepairTest.getQuixBugsCommand;
-import static org.junit.Assert.*;
 
 public class FaultLocalizationExtensionTest {
 
 	@Test
 	public void testFlacocoExtensionjKaliFindingMoreThanOneSolution() throws Exception {
-		AstorMain gzoltarMain =
-				runjKaliFindingMoreThanOneSolution(GZoltarFaultLocalization.class.getCanonicalName());
-		AstorMain flacocoMain =
-				runjKaliFindingMoreThanOneSolution(FlacocoFaultLocalization.class.getCanonicalName());
+		AstorMain gzoltarMain = runjKaliFindingMoreThanOneSolution(GZoltarFaultLocalization.class.getCanonicalName());
+		AstorMain flacocoMain = runjKaliFindingMoreThanOneSolution(FlacocoFaultLocalization.class.getCanonicalName());
 
 		checkNoRegression(flacocoMain, gzoltarMain);
 	}
 
 	@Test
 	public void testFlacocoExtensionShortestPathLenghtsRepairStatement() throws Exception {
-		AstorMain gzoltarMain =
-				run_shortest_path_lengthsRepair_statement(GZoltarFaultLocalization.class.getCanonicalName());
-		AstorMain flacocoMain =
-				run_shortest_path_lengthsRepair_statement(FlacocoFaultLocalization.class.getCanonicalName());
+		AstorMain gzoltarMain = run_shortest_path_lengthsRepair_statement(
+				GZoltarFaultLocalization.class.getCanonicalName());
+		AstorMain flacocoMain = run_shortest_path_lengthsRepair_statement(
+				FlacocoFaultLocalization.class.getCanonicalName());
 
 		checkNoRegression(flacocoMain, gzoltarMain);
 	}
@@ -53,10 +56,8 @@ public class FaultLocalizationExtensionTest {
 	@Test
 	@Ignore
 	public void testFlacocoExtensionMath85() throws Exception {
-		AstorMain gzoltarMain =
-				runMath85(GZoltarFaultLocalization.class.getCanonicalName());
-		AstorMain flacocoMain =
-				runMath85(FlacocoFaultLocalization.class.getCanonicalName());
+		AstorMain gzoltarMain = runMath85(GZoltarFaultLocalization.class.getCanonicalName());
+		AstorMain flacocoMain = runMath85(FlacocoFaultLocalization.class.getCanonicalName());
 
 		checkNoRegression(flacocoMain, gzoltarMain);
 	}
@@ -90,17 +91,20 @@ public class FaultLocalizationExtensionTest {
 		assertEquals(gzoltarMain.getEngine().getProjectFacade().getProperties().getFailingTestCases(),
 				flacocoMain.getEngine().getProjectFacade().getProperties().getFailingTestCases());
 
-		// Assert there was no regression (i.e. flacoco identifies all the lines that gzoltar did)
+		// Assert there was no regression (i.e. flacoco identifies all the lines that
+		// gzoltar did)
 		for (SuspiciousModificationPoint gsp : gzoltarSuspicious) {
 			boolean found = false;
 			for (SuspiciousModificationPoint fsp : flacocoSuspicious) {
 				try {
-					assertEquals(gsp.getSuspicious().getSuspiciousValue(), fsp.getSuspicious().getSuspiciousValue(), 0.00);
+					assertEquals(gsp.getSuspicious().getSuspiciousValue(), fsp.getSuspicious().getSuspiciousValue(),
+							0.00);
 					assertEquals(gsp.getSuspicious().getFileName(), fsp.getSuspicious().getFileName());
 					assertEquals(gsp.getSuspicious().getClassName(), fsp.getSuspicious().getClassName());
 					// flacoco doesn't return the method info like gzoltar
 					// this information isn't used in astor currently
-					// assertEquals(gsp.getSuspicious().getMethodName(), fsp.getSuspicious().getMethodName());
+					// assertEquals(gsp.getSuspicious().getMethodName(),
+					// fsp.getSuspicious().getMethodName());
 					assertEquals(gsp.getSuspicious().getLineNumber(), fsp.getSuspicious().getLineNumber());
 
 					// We break if we have found it
@@ -133,34 +137,36 @@ public class FaultLocalizationExtensionTest {
 
 		assertEquals(0, compilerResult);
 
-		File binJavaFolder = new File("./examples/test-jkali-multiple-solutions/target/classes/com/example/jkali_multiple_solutions");
+		File binJavaFolder = new File(
+				"./examples/test-jkali-multiple-solutions/target/classes/com/example/jkali_multiple_solutions");
 		if (!binJavaFolder.exists()) {
 			binJavaFolder.mkdirs();
 		}
 
-		File compiledSource = new File("./examples/test-jkali-multiple-solutions/target/com/example/jkali_multiple_solutions/App.class");
+		File compiledSource = new File(
+				"./examples/test-jkali-multiple-solutions/target/com/example/jkali_multiple_solutions/App.class");
 		compiledSource.renameTo(new File(binJavaFolder, compiledSource.getName()));
 
-		File binTestFolder = new File("./examples/test-jkali-multiple-solutions/target/test-classes/com/example/jkali_multiple_solutions");
+		File binTestFolder = new File(
+				"./examples/test-jkali-multiple-solutions/target/test-classes/com/example/jkali_multiple_solutions");
 		if (!binTestFolder.exists()) {
 			binTestFolder.mkdirs();
 		}
 
-		File compiledTest = new File("./examples/test-jkali-multiple-solutions/target/com/example/jkali_multiple_solutions/AppTest.class");
+		File compiledTest = new File(
+				"./examples/test-jkali-multiple-solutions/target/com/example/jkali_multiple_solutions/AppTest.class");
 		compiledTest.renameTo(new File(binTestFolder, compiledTest.getName()));
 
 		AstorMain main1 = new AstorMain();
 		String dep = new File("./examples/libs/junit-4.4.jar").getAbsolutePath();
 		File out = new File(ConfigurationProperties.getProperty("workingDirectory"));
-		String[] args = new String[]{"-dependencies", dep, "-mode", ExecutionMode.jKali.toString().toLowerCase(),
+		String[] args = new String[] { "-dependencies", dep, "-mode", ExecutionMode.jKali.toString().toLowerCase(),
 				"-failing", "com.example.jkali_multiple_solutions.AppTest", "-location",
-				new File("./examples/test-jkali-multiple-solutions").getAbsolutePath(), "-package", "com.example.jkali_multiple_solutions", "-srcjavafolder",
-				"/src/main/java/", "-srctestfolder", "/src/test/java", "-binjavafolder", "/target/classes", "-bintestfolder",
-				"/target/test-classes", "-out",
-				out.getAbsolutePath(),
-				"-scope", "package", "-seed", "10", "-maxgen", "10000", "-stopfirst", "false",
-				"-faultlocalization", fltorun
-		};
+				new File("./examples/test-jkali-multiple-solutions").getAbsolutePath(), "-package",
+				"com.example.jkali_multiple_solutions", "-srcjavafolder", "/src/main/java/", "-srctestfolder",
+				"/src/test/java", "-binjavafolder", "/target/classes", "-bintestfolder", "/target/test-classes", "-out",
+				out.getAbsolutePath(), "-scope", "package", "-seed", "10", "-maxgen", "10000", "-stopfirst", "false",
+				"-faultlocalization", fltorun };
 		main1.execute(args);
 
 		List<ProgramVariant> solutions = main1.getEngine().getSolutions();
@@ -194,7 +200,7 @@ public class FaultLocalizationExtensionTest {
 		csDefault.command.put("-maxgen", "0");
 		csDefault.command.put("-modificationpointnavigation", SuspiciousNavigationValues.WEIGHT.toString());
 		csDefault.command.put("-faultlocalization", fltorun);
-		csDefault.command.put("-parameters", "includeTestInSusp:true:loglevel:INFO");
+		csDefault.command.put("-parameters", "includeTestInSusp:true:loglevel:INFO:maxmemory:-Xmx8G");
 
 		final Double flthreshold = 0.5;
 		csDefault.command.put("-flthreshold", flthreshold.toString());

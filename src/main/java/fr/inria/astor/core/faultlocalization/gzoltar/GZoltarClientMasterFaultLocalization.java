@@ -170,7 +170,6 @@ public class GZoltarClientMasterFaultLocalization extends GZoltarFaultLocalizati
 		String commandToPrint = (trunk != 0 && commandString.length() > trunk)
 				? (commandString.substring(0, trunk) + "..AND " + (commandString.length() - trunk) + " CHARS MORE...")
 				: commandString;
-		logger.info("Executing process: \n" + commandToPrint);
 	}
 
 	private String toString(List<String> command) {

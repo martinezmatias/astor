@@ -158,7 +158,6 @@ public class FlacocoFaultLocalization implements FaultLocalizationStrategy {
 				}
 			}
 		}
-		System.out.print("[For test]max mem flacoco TestRunnerJVMArgs: " + config.getTestRunnerJVMArgs());
 
 		return config;
 	}

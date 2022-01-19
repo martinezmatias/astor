@@ -1,8 +1,23 @@
 package fr.inria.astor.core.faultlocalization.gzoltar;
 
+import static fr.inria.astor.core.faultlocalization.FaultLocalizationUtils.addFlakyFailingTestToIgnoredList;
+
+import java.io.File;
+import java.net.URL;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.apache.log4j.Logger;
+
 import com.gzoltar.core.GZoltar;
 import com.gzoltar.core.components.Statement;
 import com.gzoltar.core.instr.testing.TestResult;
+
 import fr.inria.astor.core.entities.ProgramVariant;
 import fr.inria.astor.core.faultlocalization.FaultLocalizationResult;
 import fr.inria.astor.core.faultlocalization.FaultLocalizationStrategy;
@@ -10,15 +25,6 @@ import fr.inria.astor.core.faultlocalization.entity.SuspiciousCode;
 import fr.inria.astor.core.setup.ConfigurationProperties;
 import fr.inria.astor.core.setup.FinderTestCases;
 import fr.inria.astor.core.setup.ProjectRepairFacade;
-import org.apache.log4j.Logger;
-
-import java.io.File;
-import java.net.URL;
-import java.text.DecimalFormat;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static fr.inria.astor.core.faultlocalization.FaultLocalizationUtils.addFlakyFailingTestToIgnoredList;
 
 /**
  * Facade of Fault Localization techniques like GZoltar or own implementations
@@ -104,7 +110,8 @@ public class GZoltarFaultLocalization implements FaultLocalizationStrategy {
 
 			for (SuspiciousCode suspiciousCode : suspiciousStatemens) {
 				filtercandidates.add(suspiciousCode);
-				logger.info("Suspicious:  line " + suspiciousCode.getClassName() + " l: " + suspiciousCode.getLineNumber() + ", susp " + suspiciousCode.getSuspiciousValue());
+				logger.info("Suspicious:  line " + suspiciousCode.getClassName() + " l: "
+						+ suspiciousCode.getLineNumber() + ", susp " + suspiciousCode.getSuspiciousValue());
 			}
 			flResult.setCandidates(filtercandidates);
 
