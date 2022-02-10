@@ -60,7 +60,8 @@ jobs:
           "fr.inria.astor.test.D4JWorkflowTestSingle#testChart13JKali",  
           "fr.inria.astor.test.D4JWorkflowTestSingle#testChart15JKali",
           "fr.inria.astor.test.D4JWorkflowTestSingle#testChart25JKali", 
-          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart26JKali",    	  		
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testChart26JKali", 
+          "fr.inria.astor.test.D4JWorkflowTestSingle#testMath40JKaliSummary",   	  		
       ]
 
     steps:
